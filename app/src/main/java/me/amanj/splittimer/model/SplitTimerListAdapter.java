@@ -152,7 +152,6 @@ public class SplitTimerListAdapter extends RecyclerView.Adapter<SplitTimerListAd
                 public void run() {
                     int index = mItems.indexOf(item);
                     remove(index);
-                    notifyItemChanged(position);
                 }
             };
             handler.postDelayed(pendingRemovalRunnable, PENDING_REMOVAL_TIMEOUT);
@@ -214,7 +213,7 @@ public class SplitTimerListAdapter extends RecyclerView.Adapter<SplitTimerListAd
         } else {
 
             // we need to show the "normal" state
-            //holder.itemView.setBackgroundColor(Color.WHITE);
+            holder.itemView.setBackgroundColor(Color.WHITE);
             nameView.setVisibility(View.VISIBLE);
             timeView.setVisibility(View.VISIBLE);
             overflow.setVisibility(View.VISIBLE);
