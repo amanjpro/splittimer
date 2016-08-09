@@ -28,32 +28,8 @@
   ~  (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF
   ~  THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
   -->
-<menu xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:id="@+id/drawer_view">
-    <item android:title="@string/navbar_settings">
-        <menu>
-            <item android:id="@+id/nav_precision"
-                android:title="@string/precision_label" />
-            <item
-                app:actionLayout="@layout/nav_lap_on_stop_switch"
-                android:id="@+id/nav_lap_on_stop_switch"
-                android:title="@string/navbar_lap_on_stop" />
-            <item
-                app:actionLayout="@layout/nav_screen_orientation_switch"
-                android:id="@+id/nav_screen_orientation_switch"
-                android:title="@string/navbar_screen_orientation_switch" />
-            <item android:id="@+id/nav_clear_history"
-                android:title="@string/clear_history_label" />
-        </menu>
-    </item>
 
-    <item android:title="@string/navbar_about_app">
-        <menu>
-            <item android:id="@+id/nav_rate_me"
-                android:title="@string/rate_me_label" />
-            <item android:id="@+id/nav_fork_me"
-                android:title="@string/fork_me_label" />
-        </menu>
-    </item>
-</menu>
+<android.support.v7.widget.SwitchCompat
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent" />

@@ -46,11 +46,12 @@
     <string name="drawer_open">Open navigation drawer</string>
     <string name="drawer_close">Close navigation drawer</string>
     <string name="precision_label">Precision</string>
-    <string name="clear_history_label">Clear History</string>
+    <string name="clear_history_label">Clear history</string>
     <string name="rate_me_label">Rate me</string>
     <string name="fork_me_label">Developer page</string>
     <string name="navbar_settings">Settings</string>
     <string name="navbar_lap_on_stop">Lap on stop</string>
+    <string name="navbar_screen_orientation_switch">Screen rotation</string>
     <string name="navbar_about_app">About</string>
     <string name="fine_precision">1/1000 seconds</string>
     <string name="less_fine_precision">1/100 seconds</string>

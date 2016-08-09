@@ -57,7 +57,9 @@ import me.amanj.splittimer.model.TimeInformation;
 public class IO {
 
     private final static String TAG = IO.class.getCanonicalName();
-    public static void loadConfigurations(SwitchCompat switchCompat, Context context) {
+    public static void loadConfigurations(SwitchCompat lapOnStopSwtich,
+                                          SwitchCompat screenOrientationSwitch,
+                                          Context context) {
         BufferedReader reader = null;
         Log.i(TAG, "Loading configurations");
         try {
@@ -73,8 +75,13 @@ public class IO {
 
             if (null != (line = reader.readLine())) {
                 Configurations.setLapOnStop(Boolean.parseBoolean(line));
-                switchCompat.setChecked(Configurations.shouldLapOnStop());
+                lapOnStopSwtich.setChecked(Configurations.shouldLapOnStop());
                 Log.i(TAG, "Should lap on stop is loaded as: " + line);
+            }
+            if (null != (line = reader.readLine())) {
+                Configurations.shouldActivateScreenRotation(Boolean.parseBoolean(line));
+                screenOrientationSwitch.setChecked(Configurations.isScreenRotationActivated());
+                Log.i(TAG, "Should screen be fixed is loaded as: " + line);
             }
 
         } catch (IOException e) {

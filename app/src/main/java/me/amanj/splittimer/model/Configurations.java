@@ -55,10 +55,13 @@ public class Configurations {
 
 
     private static boolean LAP_ON_STOP = true;
+    private static boolean SCREEN_ORIENTATION_ACTIVATED = false;
 
     public static boolean shouldLapOnStop() { return LAP_ON_STOP; }
     public static void setLapOnStop(boolean option) { LAP_ON_STOP = option;}
 
+    public static boolean isScreenRotationActivated() { return SCREEN_ORIENTATION_ACTIVATED; }
+    public static void shouldActivateScreenRotation(boolean option) { SCREEN_ORIENTATION_ACTIVATED = option;}
 
     public static final String APP_FORK_URL = "http://www.github.com/amanjpro/splittimer";
 
@@ -72,6 +75,8 @@ public class Configurations {
         builder.append(CURRENT_FORMAT);
         builder.append("\n");
         builder.append(LAP_ON_STOP);
+        builder.append("\n");
+        builder.append(SCREEN_ORIENTATION_ACTIVATED);
         return builder.toString();
     }
 
