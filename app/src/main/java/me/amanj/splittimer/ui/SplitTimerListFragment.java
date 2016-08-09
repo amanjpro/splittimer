@@ -152,11 +152,12 @@ public class SplitTimerListFragment extends Fragment {
                 int swipedPosition = viewHolder.getAdapterPosition();
                 xMark.setVisible(false, false);
                 viewHolder.itemView.invalidate();
-                mAdapter.pendingRemoval(swipedPosition);
-                if(swipedPosition == mAdapter.getItemCount())
-                    swipedPosition = 0;
+                int newPosition = swipedPosition;
+                if(swipedPosition == mAdapter.getItemCount() - 1)
+                    newPosition = 0;
                 if(mAdapter.getItemCount() > 1 && mAdapter.getLastOpened() == swipedPosition)
-                    mAdapter.updateShowFragment(swipedPosition);
+                    mAdapter.updateShowFragment(newPosition + 1);
+                mAdapter.pendingRemoval(swipedPosition);
             }
 
             @Override

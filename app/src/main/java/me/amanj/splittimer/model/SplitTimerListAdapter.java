@@ -122,7 +122,6 @@ public class SplitTimerListAdapter extends RecyclerView.Adapter<SplitTimerListAd
         }
         if (mItems.contains(item)) {
             mItems.remove(index);
-            notifyItemChanged(index);
             notifyDataSetChanged();
         }
     }
@@ -141,7 +140,7 @@ public class SplitTimerListAdapter extends RecyclerView.Adapter<SplitTimerListAd
         });
     }
 
-    public void pendingRemoval(int position) {
+    public void pendingRemoval(final int position) {
         final TimeInformation item = mItems.get(position);
         if (!itemsPendingRemoval.contains(item)) {
             itemsPendingRemoval.add(item);
@@ -151,7 +150,9 @@ public class SplitTimerListAdapter extends RecyclerView.Adapter<SplitTimerListAd
             Runnable pendingRemovalRunnable = new Runnable() {
                 @Override
                 public void run() {
-                    remove(mItems.indexOf(item));
+                    int index = mItems.indexOf(item);
+                    remove(index);
+                    notifyItemChanged(position);
                 }
             };
             handler.postDelayed(pendingRemovalRunnable, PENDING_REMOVAL_TIMEOUT);
