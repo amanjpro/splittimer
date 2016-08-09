@@ -70,6 +70,7 @@ import me.amanj.splittimer.R;
 import me.amanj.splittimer.messages.MessageTag;
 import me.amanj.splittimer.messages.Send;
 import me.amanj.splittimer.ui.SaveDialog;
+import me.amanj.splittimer.ui.SplitTimerListFragment;
 
 
 public class SplitTimerListAdapter extends RecyclerView.Adapter<SplitTimerListAdapter.ViewHolder> {
@@ -81,6 +82,11 @@ public class SplitTimerListAdapter extends RecyclerView.Adapter<SplitTimerListAd
     private Handler handler = new Handler(); // hanlder for running delayed runnables
     // map of items to pending runnables, so we can cancel a removal if need be
     private Map<TimeInformation, Runnable> pendingRunnables = new HashMap<>();
+    private int lastOpened = -1;
+
+
+    public int getLastOpened() { return lastOpened; }
+    public void setLastOpened(int lastOpened) { this.lastOpened = lastOpened; }
 
     private final Context mContext;
     private final static String TAG = SplitTimerListAdapter.class.getCanonicalName();
@@ -116,8 +122,23 @@ public class SplitTimerListAdapter extends RecyclerView.Adapter<SplitTimerListAd
         }
         if (mItems.contains(item)) {
             mItems.remove(index);
-            notifyItemRemoved(index);
+            notifyItemChanged(index);
+            notifyDataSetChanged();
         }
+    }
+
+    public void updateShowFragment(final int index){
+        bus.post(new Send<Integer>() {
+            @Override
+            public Integer receive() {
+               return index;
+            }
+
+            @Override
+            public MessageTag tag() {
+                return MessageTag.DELETED;
+            }
+        });
     }
 
     public void pendingRemoval(int position) {
@@ -215,13 +236,13 @@ public class SplitTimerListAdapter extends RecyclerView.Adapter<SplitTimerListAd
                 public void onClick(View view) {
                     // Notify the hosting Activity that a selection has been made.
                     Log.i(TAG, "List item clicked at: " + position);
-                    final TimeInformation tinfo = (TimeInformation) getItem(position);
                     bus.post(new Send<TimeInformation>() {
                         public MessageTag tag() {
                             return MessageTag.OPEN;
                         }
-
                         public TimeInformation receive() {
+                            final TimeInformation tinfo = (TimeInformation) getItem(position);
+                            SplitTimerListAdapter.this.lastOpened = position;
                             return tinfo;
                         }
                     });
@@ -321,17 +342,9 @@ public class SplitTimerListAdapter extends RecyclerView.Adapter<SplitTimerListAd
             final int index = getLayoutPosition();
             switch (item.getItemId()) {
                 case R.id.context_menu_delete_entry:
-                    outer.remove(getLayoutPosition());
-                    bus.post(new Send<Integer>() {
-                        @Override
-                        public Integer receive() {
-                            return index;
-                        }
-                        @Override
-                        public MessageTag tag() {
-                            return MessageTag.DELETED;
-                        }
-                    });
+                    outer.remove(index);
+                    if(outer.lastOpened == index)
+                        outer.updateShowFragment(index);
                     return true;
                 case R.id.context_menu_rename_entry:
                     SaveDialog newDialog = SaveDialog.newInstance(new ResultReceiver(null) {
@@ -340,16 +353,19 @@ public class SplitTimerListAdapter extends RecyclerView.Adapter<SplitTimerListAd
                             final String result = resultData.getString("name");
                             if (resultCode == Activity.RESULT_OK) {
                                 outer.rename(result, index);
-                                bus.post(new Send<String>() {
-                                    @Override
-                                    public String receive() {
-                                        return result;
-                                    }
-                                    @Override
-                                    public MessageTag tag() {
-                                        return MessageTag.RENAMED;
-                                    }
-                                });
+                                if(outer.lastOpened == index) {
+                                    bus.post(new Send<String>() {
+                                        @Override
+                                        public String receive() {
+                                            return result;
+                                        }
+
+                                        @Override
+                                        public MessageTag tag() {
+                                            return MessageTag.RENAMED;
+                                        }
+                                    });
+                                }
                             }
                         }
                     });

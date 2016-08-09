@@ -76,6 +76,8 @@ public class SplitTimerListFragment extends Fragment {
         return fragment;
     }
 
+
+
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -151,6 +153,10 @@ public class SplitTimerListFragment extends Fragment {
                 xMark.setVisible(false, false);
                 viewHolder.itemView.invalidate();
                 mAdapter.pendingRemoval(swipedPosition);
+                if(swipedPosition == mAdapter.getItemCount())
+                    swipedPosition = 0;
+                if(mAdapter.getItemCount() > 1 && mAdapter.getLastOpened() == swipedPosition)
+                    mAdapter.updateShowFragment(swipedPosition);
             }
 
             @Override
@@ -288,6 +294,7 @@ public class SplitTimerListFragment extends Fragment {
     public void onSaveInstanceState(Bundle outState) {
         super.onSaveInstanceState(outState);
         outState.putString("timeInfos", mAdapter.dump());
+        outState.putInt("lastOpened", mAdapter.getLastOpened());
     }
     @Override
     public void onActivityCreated(Bundle savedInstanceState) {
@@ -296,6 +303,7 @@ public class SplitTimerListFragment extends Fragment {
         recyclerView.setDescendantFocusability(ViewGroup.FOCUS_BLOCK_DESCENDANTS);
         setRetainInstance(true);
         if(savedInstanceState != null) {
+            mAdapter.setLastOpened(savedInstanceState.getInt("lastOpened"));
             String[] timeInfos = savedInstanceState.getString("timeInfos").split("\n");
             List<TimeInformation> times = new ArrayList<>();
             for(String time: timeInfos) {
