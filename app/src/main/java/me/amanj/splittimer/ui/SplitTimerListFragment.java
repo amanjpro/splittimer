@@ -319,12 +319,11 @@ public class SplitTimerListFragment extends Fragment {
         else if(event.tag() == MessageTag.DELETED) {
             int index     = ((Send<Integer>) event).receive();
             if(mAdapter.getItemCount() > 0) {
-                final int nextIndex = index > mAdapter.getItemCount()? 0 : index;
+                final int nextIndex = index >= mAdapter.getItemCount()? 0 : index;
                 bus.post(new Send<TimeInformation>() {
                     public MessageTag tag() {
                         return MessageTag.MAYBE_OPEN;
                     }
-
                     public TimeInformation receive() {
                         return (TimeInformation) mAdapter.getItem(nextIndex);
                     }
