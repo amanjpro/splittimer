@@ -181,6 +181,10 @@ public class SplitTimerActivity extends AppCompatActivity {
                     public MessageTag tag() { return MessageTag.CLEAR_HISTORY; }
                     public Void receive() { return null; }
                 });
+                bus.post(new Send<Void>() {
+                    public MessageTag tag() { return MessageTag.REMOVE_LAST_FRAGMETN; }
+                    public Void receive() { return null; }
+                });
                 break;
             case R.id.nav_fork_me:
                 Intent github =
