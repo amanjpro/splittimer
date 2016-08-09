@@ -31,6 +31,7 @@
 package me.amanj.splittimer.model;
 
 
+import java.io.Serializable;
 import java.text.Format;
 import java.text.SimpleDateFormat;
 
@@ -38,10 +39,12 @@ import java.text.SimpleDateFormat;
  * Created by Amanj Sherwany on 8/4/16.
  */
 
-public class Timestamp {
+public class Timestamp implements Serializable {
     private long startMillis, stopMillis, lastLap;
     private boolean isRunning, hasLapped;
-    private static Format formatter = new SimpleDateFormat(Configurations.getCurrentFormat());
+    // don't serialize this
+    transient private static Format formatter =
+            new SimpleDateFormat(Configurations.getCurrentFormat());
 
     public Timestamp() {}
 

@@ -81,6 +81,7 @@ public class TimerFragment extends Fragment {
     private InteractiveTimestampsAdapter timestampsAdapter;
     private TextView currentTimeView, totalTimeDisplay;
     private boolean isRunning;
+    private Timestamp tstamp;
     private RecyclerView listView;
     private ImageButton saveButton, lapButton, actionButton;
 
@@ -108,7 +109,7 @@ public class TimerFragment extends Fragment {
                 (ImageButton) view.findViewById(R.id.start_stop_toggle_button);
         lapButton = (ImageButton) view.findViewById(R.id.lap_button);
         saveButton = (ImageButton) view.findViewById((R.id.save_button));
-        final Timestamp  tstamp = new Timestamp();
+        tstamp = new Timestamp();
 
         LinearLayoutManager llm = new LinearLayoutManager(this.getContext());
         llm.setOrientation(LinearLayoutManager.VERTICAL);
@@ -121,7 +122,6 @@ public class TimerFragment extends Fragment {
         currentTimeView.setText(Timestamp.timeStampToString(0l));
         totalTimeDisplay.setText(Timestamp.timeStampToString(0l));
 
-        runner = new TimeRunner(currentTimeView, totalTimeDisplay);
 
         saveButton.setActivated(false);
         saveButton.setEnabled(false);
@@ -261,7 +261,8 @@ public class TimerFragment extends Fragment {
         outState.putSerializable("timestamps", timestampsAdapter.getAdapterContent());
         outState.putCharSequence("totalDisplay", totalTimeDisplay.getText());
         if(isRunning) {
-            outState.putSerializable("runner", runner);
+            runner.cancel(true);
+            outState.putSerializable("timestamp", tstamp);
         }
     }
 
@@ -270,12 +271,14 @@ public class TimerFragment extends Fragment {
         super.onActivityCreated(savedInstanceState);
         listView.setDescendantFocusability(ViewGroup.FOCUS_BLOCK_DESCENDANTS);
         setRetainInstance(true);
+        Log.d(TAG, "Entering onActivityCreated");
         if(savedInstanceState != null) {
             isRunning = savedInstanceState.getBoolean("isRunning");
             if(isRunning) {
-                runner = (TimeRunner) savedInstanceState.getSerializable("runner");
+                tstamp = (Timestamp) savedInstanceState.getSerializable("timestamp");
+                runner = new TimeRunner(currentTimeView, totalTimeDisplay);
+                runner.execute(tstamp);
             }
-            runner.updateDisplays(currentTimeView, totalTimeDisplay);
             timestampsAdapter.setTimeInformation(
                     (TimeInformation)savedInstanceState.getSerializable("timestamps"));
             boolean lapState = savedInstanceState.getBoolean("lapState");

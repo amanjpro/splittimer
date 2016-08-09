@@ -43,7 +43,7 @@ import me.amanj.splittimer.model.Timestamp;
  */
 
 
-public class TimeRunner extends AsyncTask<Timestamp, String, String> implements Serializable {
+public class TimeRunner extends AsyncTask<Timestamp, String, String> {
     private TextView lapDisplay, totalDisplay;
 
     public TimeRunner(TextView lapDisplay, TextView totalDisplay) {
@@ -51,10 +51,10 @@ public class TimeRunner extends AsyncTask<Timestamp, String, String> implements 
         this.lapDisplay = lapDisplay;
     }
 
-    public void updateDisplays(TextView lapDisplay, TextView totalDisplay) {
-        this.lapDisplay = lapDisplay;
-        this.totalDisplay = totalDisplay;
-    }
+//    public void updateDisplays(TextView lapDisplay, TextView totalDisplay) {
+//        this.lapDisplay = lapDisplay;
+//        this.totalDisplay = totalDisplay;
+//    }
 
     @Override
     protected String doInBackground(Timestamp... params) {
