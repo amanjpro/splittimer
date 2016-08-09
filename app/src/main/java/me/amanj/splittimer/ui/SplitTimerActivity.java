@@ -218,6 +218,7 @@ public class SplitTimerActivity extends AppCompatActivity {
                 TimeInformation lastOpened = ((Send<TimeInformation>) event).receive();
                 if(lastOpened != null)
                     openTimeInformation(lastOpened);
+                vpPager.setCurrentItem(DEFAULT_FRAGMENT_NUMBER - 1);
             }
         }
     }
