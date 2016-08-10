@@ -13,5 +13,11 @@ save performances and merge two adjacent laps.
 
 You can download the latest version of this app at:
 
-(https://play.google.com/store/apps/details?id=me.amanj.splittimer&hl=en)
+https://play.google.com/store/apps/details?id=me.amanj.splittimer&hl=en
+
+
+# Credits
+
+Icons are provided by: http://icons8.com
+
 
