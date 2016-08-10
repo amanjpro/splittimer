@@ -8,3 +8,10 @@ as 3.0 (Honeycomb).
 The app supports different layouts for different screens. And it lets users to
 save performances and merge two adjacent laps.
 
+
+# Download
+
+You can download the latest version of this app at:
+
+(https://play.google.com/store/apps/details?id=me.amanj.splittimer&hl=en)
+
