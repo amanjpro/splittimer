@@ -204,7 +204,7 @@ public class SplitTimerActivity extends AppCompatActivity {
                     public Void receive() { return null; }
                 });
                 bus.post(new Send<Void>() {
-                    public MessageTag tag() { return MessageTag.REMOVE_LAST_FRAGMETN; }
+                    public MessageTag tag() { return MessageTag.REMOVE_LAST_FRAGMENT; }
                     public Void receive() { return null; }
                 });
                 break;
@@ -232,7 +232,7 @@ public class SplitTimerActivity extends AppCompatActivity {
             TimeInformation lastOpened = ((Send<TimeInformation>) event).receive();
             if(lastOpened != null)
                 openTimeInformation(lastOpened);
-        } else if(event.tag() == MessageTag.REMOVE_LAST_FRAGMETN) {
+        } else if(event.tag() == MessageTag.REMOVE_LAST_FRAGMENT) {
             if(adapterViewPager.getCount() > DEFAULT_FRAGMENT_NUMBER)
                 adapterViewPager.removeLastFragment();
         } else if(event.tag() == MessageTag.MAYBE_OPEN) {

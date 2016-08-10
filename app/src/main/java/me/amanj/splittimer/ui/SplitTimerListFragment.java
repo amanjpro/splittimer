@@ -340,7 +340,7 @@ public class SplitTimerListFragment extends Fragment {
             } else {
                 bus.post(new Send<Void>() {
                     public MessageTag tag() {
-                        return MessageTag.REMOVE_LAST_FRAGMETN;
+                        return MessageTag.REMOVE_LAST_FRAGMENT;
                     }
 
                     public Void receive() {
