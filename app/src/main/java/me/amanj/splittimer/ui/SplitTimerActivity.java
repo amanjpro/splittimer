@@ -230,8 +230,10 @@ public class SplitTimerActivity extends AppCompatActivity {
     public void onEvent(final Message event) {
         if(event.tag() == MessageTag.OPEN) {
             TimeInformation lastOpened = ((Send<TimeInformation>) event).receive();
-            if(lastOpened != null)
+            if(lastOpened != null) {
                 openTimeInformation(lastOpened);
+                vpPager.setCurrentItem(DEFAULT_FRAGMENT_NUMBER);
+            }
         } else if(event.tag() == MessageTag.REMOVE_LAST_FRAGMENT) {
             if(adapterViewPager.getCount() > DEFAULT_FRAGMENT_NUMBER)
                 adapterViewPager.removeLastFragment();
@@ -240,7 +242,7 @@ public class SplitTimerActivity extends AppCompatActivity {
                 TimeInformation lastOpened = ((Send<TimeInformation>) event).receive();
                 if(lastOpened != null)
                     openTimeInformation(lastOpened);
-                vpPager.setCurrentItem(DEFAULT_FRAGMENT_NUMBER - 1);
+                //vpPager.setCurrentItem(DEFAULT_FRAGMENT_NUMBER - 1);
             }
         }
     }
@@ -262,7 +264,6 @@ public class SplitTimerActivity extends AppCompatActivity {
                 return tinfo;
             }
         });
-        vpPager.setCurrentItem(adapterViewPager.getCount() - 1);
     }
 
 

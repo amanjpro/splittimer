@@ -126,7 +126,7 @@ public class SplitTimerListAdapter extends RecyclerView.Adapter<SplitTimerListAd
         }
     }
 
-    public void updateShowFragment(final int index){
+    public void updateShowFragment(final int index, final MessageTag tag){
         bus.post(new Send<Integer>() {
             @Override
             public Integer receive() {
@@ -135,7 +135,7 @@ public class SplitTimerListAdapter extends RecyclerView.Adapter<SplitTimerListAd
 
             @Override
             public MessageTag tag() {
-                return MessageTag.DELETED;
+                return tag;
             }
         });
     }
@@ -344,7 +344,7 @@ public class SplitTimerListAdapter extends RecyclerView.Adapter<SplitTimerListAd
                 case R.id.context_menu_delete_entry:
                     outer.remove(index);
                     if(outer.lastOpened == index)
-                        outer.updateShowFragment(index);
+                        outer.updateShowFragment(index, MessageTag.DELETED);
                     return true;
                 case R.id.context_menu_rename_entry:
                     SaveDialog newDialog = SaveDialog.newInstance(new ResultReceiver(null) {

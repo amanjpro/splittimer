@@ -153,11 +153,11 @@ public class SplitTimerListFragment extends Fragment {
                 xMark.setVisible(false, false);
                 viewHolder.itemView.invalidate();
                 int newPosition = swipedPosition;
+                mAdapter.pendingRemoval(swipedPosition);
                 if(swipedPosition == mAdapter.getItemCount() - 1)
                     newPosition = 0;
-                if(mAdapter.getItemCount() > 1 && mAdapter.getLastOpened() == swipedPosition)
-                    mAdapter.updateShowFragment(newPosition + 1);
-                mAdapter.pendingRemoval(swipedPosition);
+                if(mAdapter.getItemCount() >= 1 && mAdapter.getLastOpened() == swipedPosition)
+                    mAdapter.updateShowFragment(newPosition + 1, MessageTag.SWIPED);
             }
 
             @Override
@@ -325,9 +325,10 @@ public class SplitTimerListFragment extends Fragment {
             mAdapter.add(((Send<TimeInformation>) event).receive());
         else if(event.tag() == MessageTag.CLEAR_HISTORY)
             mAdapter.clear();
-        else if(event.tag() == MessageTag.DELETED) {
+        else if(event.tag() == MessageTag.DELETED || event.tag() == MessageTag.SWIPED) {
             int index     = ((Send<Integer>) event).receive();
-            if(mAdapter.getItemCount() > 0) {
+            if((mAdapter.getItemCount() > 0 && event.tag() == MessageTag.DELETED) ||
+                    (mAdapter.getItemCount() > 1 && event.tag() == MessageTag.SWIPED)) {
                 final int nextIndex = index >= mAdapter.getItemCount()? 0 : index;
                 bus.post(new Send<TimeInformation>() {
                     public MessageTag tag() {

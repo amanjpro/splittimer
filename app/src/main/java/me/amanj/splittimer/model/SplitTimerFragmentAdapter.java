@@ -47,14 +47,11 @@ public class SplitTimerFragmentAdapter extends FragmentStatePagerAdapter {
 
     private final Context mContext;
     private int FRAGMENT_COUNT;
-    private ShowTimeInformationFragment timeInfoFragment;
-    private FragmentManager fm;
 
     public SplitTimerFragmentAdapter(FragmentManager fm, Context mContext, int count) {
         super(fm);
         this.mContext = mContext;
         this.FRAGMENT_COUNT = count;
-        this.fm = fm;
     }
 
     @Override
