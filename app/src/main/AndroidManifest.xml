@@ -9,6 +9,11 @@
         android:supportsRtl="true"
         android:theme="@style/AndroidTheme">
 
+        <supports-screens
+            android:smallScreens="true"
+            android:normalScreens="true"
+            android:largeScreens="true"
+            android:xlargeScreens="true" />
 
         <android:uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
         <android:uses-permission android:name="android.permission.READ_PHONE_STATE" />
