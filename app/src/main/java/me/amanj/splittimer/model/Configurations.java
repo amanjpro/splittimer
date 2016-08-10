@@ -36,7 +36,7 @@ package me.amanj.splittimer.model;
 
 public class Configurations {
     public static final String[] precisions =
-            {"mm:ss", "mm:ss:S", "mm:ss:SS", "mm:ss:SSS"};
+            {"HH:mm:ss", "HH:mm:ss.S", "mm:ss.SS", "mm:ss.SSS"};
 
 
     public static final int PRECISION_LEVEL_ONE = 0;

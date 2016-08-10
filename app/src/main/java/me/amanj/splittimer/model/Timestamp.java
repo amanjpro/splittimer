@@ -32,8 +32,8 @@ package me.amanj.splittimer.model;
 
 
 import java.io.Serializable;
-import java.text.Format;
 import java.text.SimpleDateFormat;
+import java.util.TimeZone;
 
 /**
  * Created by Amanj Sherwany on 8/4/16.
@@ -43,10 +43,12 @@ public class Timestamp implements Serializable {
     private long startMillis, stopMillis, lastLap;
     private boolean isRunning, hasLapped;
     // don't serialize this
-    transient private static Format formatter =
+    transient private static SimpleDateFormat formatter =
             new SimpleDateFormat(Configurations.getCurrentFormat());
 
-    public Timestamp() {}
+    public Timestamp() {
+        formatter.setTimeZone(TimeZone.getTimeZone("GMT"));
+    }
 
 
     public void start() {
@@ -104,6 +106,7 @@ public class Timestamp implements Serializable {
 
     public static void updateFormatter(String newFormat) {
         formatter = new SimpleDateFormat(newFormat);
+        formatter.setTimeZone(TimeZone.getTimeZone("GMT"));
     }
 
     public static String timeStampToString(long timestamp) {
