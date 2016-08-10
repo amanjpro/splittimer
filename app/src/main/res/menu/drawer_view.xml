@@ -34,16 +34,20 @@
     <item android:title="@string/navbar_settings">
         <menu>
             <item android:id="@+id/nav_precision"
+                android:icon="@drawable/ic_action_precision_nav"
                 android:title="@string/precision_label" />
             <item
                 app:actionLayout="@layout/nav_lap_on_stop_switch"
+                android:icon="@drawable/ic_action_lap_on_stop_nav"
                 android:id="@+id/nav_lap_on_stop_switch"
                 android:title="@string/navbar_lap_on_stop" />
             <item
                 app:actionLayout="@layout/nav_screen_orientation_switch"
+                android:icon="@drawable/ic_action_screen_rotation_nav"
                 android:id="@+id/nav_screen_orientation_switch"
                 android:title="@string/navbar_screen_orientation_switch" />
             <item android:id="@+id/nav_clear_history"
+                android:icon="@drawable/ic_action_name_clear_history_nav"
                 android:title="@string/clear_history_label" />
         </menu>
     </item>
@@ -51,8 +55,10 @@
     <item android:title="@string/navbar_about_app">
         <menu>
             <item android:id="@+id/nav_rate_me"
+                android:icon="@drawable/ic_action_rate_me_nav"
                 android:title="@string/rate_me_label" />
             <item android:id="@+id/nav_fork_me"
+                android:icon="@drawable/ic_action_website_nav"
                 android:title="@string/fork_me_label" />
         </menu>
     </item>
