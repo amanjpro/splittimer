@@ -117,6 +117,7 @@ public class TimeInformation implements Cloneable, Serializable {
         builder.append(name);
         builder.append(", Saving time: ");
         builder.append(storingTime);
+        builder.append(", ");
         builder.append(laps.toString());
         return builder.toString();
     }
