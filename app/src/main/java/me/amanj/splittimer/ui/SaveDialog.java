@@ -41,6 +41,7 @@ import android.support.v4.os.ResultReceiver;
 import android.support.v7.app.AlertDialog;
 import android.view.LayoutInflater;
 import android.view.View;
+import android.view.WindowManager;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.EditText;
 import android.widget.Toast;
@@ -73,17 +74,17 @@ public class SaveDialog extends DialogFragment {
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setRetainInstance(true);
-        if(savedInstanceState == null) {
-            resultReceiver = getArguments().getParcelable("receiver");
-        } else {
-            resultReceiver = savedInstanceState.getParcelable("receiver");
-        }
+//        if(savedInstanceState == null) {
+        resultReceiver = getArguments().getParcelable("receiver");
+//        } else {
+//            resultReceiver = savedInstanceState.getParcelable("receiver");
+//        }
     }
 
     @Override
     public void onSaveInstanceState(Bundle outState) {
         super.onSaveInstanceState(outState);
-        outState.putParcelable("receiver", resultReceiver);
+//        outState.putParcelable("receiver", resultReceiver);
     }
 
 
@@ -111,8 +112,8 @@ public class SaveDialog extends DialogFragment {
         }
 
         editView.setSingleLine();
-        final InputMethodManager mgr = (InputMethodManager)
-                getActivity().getSystemService(Context.INPUT_METHOD_SERVICE);
+//        final InputMethodManager mgr = (InputMethodManager)
+//                getActivity().getSystemService(Context.INPUT_METHOD_SERVICE);
         builder.setView(view).setPositiveButton(
             R.string.save_dialog_ok_text, new DialogInterface.OnClickListener() {
                 @Override
@@ -126,13 +127,14 @@ public class SaveDialog extends DialogFragment {
                 public void onClick(DialogInterface dialogInterface, int i) {
                     SaveDialog.this.getDialog().cancel();
                     resultReceiver.send(Activity.RESULT_CANCELED, null);
-                    mgr.toggleSoftInput(InputMethodManager.SHOW_FORCED, 0);
+//                    mgr.toggleSoftInput(InputMethodManager.SHOW_FORCED, 0);
                 }
             }
         );
         // only will trigger it if no physical keyboard is open
-        mgr.toggleSoftInput(InputMethodManager.SHOW_FORCED, 0);
+//        mgr.toggleSoftInput(InputMethodManager.SHOW_FORCED, 0);
         AlertDialog dialog =  builder.create();
+        dialog.getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_STATE_ALWAYS_VISIBLE);
         dialog.setCanceledOnTouchOutside(false);
         dialog.setCancelable(false);
         editView.requestFocus();
@@ -147,7 +149,7 @@ public class SaveDialog extends DialogFragment {
                     bundle.putString("name", activityName);
                     resultReceiver.send(Activity.RESULT_OK, bundle);
                     SaveDialog.this.getDialog().dismiss();
-                    mgr.toggleSoftInput(InputMethodManager.SHOW_FORCED, 0);
+//                    mgr.toggleSoftInput(InputMethodManager.SHOW_FORCED, 0);
                 } else {
                     Toast.makeText(getActivity().getApplicationContext(),
                         R.string.error_message_no_name,
