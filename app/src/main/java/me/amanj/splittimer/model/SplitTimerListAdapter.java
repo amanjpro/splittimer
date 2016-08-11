@@ -113,11 +113,6 @@ public class SplitTimerListAdapter extends RecyclerView.Adapter<SplitTimerListAd
         notifyDataSetChanged();
     }
 
-    public void rename(String name, int position) {
-        mItems.get(position).setName(name);
-        notifyDataSetChanged();
-        //notifyItemChanged(position);
-    }
 
     public void remove(int index) {
         TimeInformation item = mItems.get(index);
@@ -392,7 +387,10 @@ public class SplitTimerListAdapter extends RecyclerView.Adapter<SplitTimerListAd
             Object[] sent = ((Send<Object[]>) message).receive();
             final String result = (String) sent[1];
             final Integer index = (Integer) sent[0];
-            rename(result, index);
+            Log.d(TAG, "ItemCount: " + getItemCount());
+            ((TimeInformation)getItem(index)).setName(result);
+            notifyDataSetChanged();
+            //notifyItemChanged(position);
             if (lastOpened == index) {
                 bus.post(new Send<String>() {
                     @Override
