@@ -21,3 +21,15 @@ https://play.google.com/store/apps/details?id=me.amanj.splittimer&hl=en
 Icons are provided by: http://icons8.com
 
 
+
+# History
+
+## Version 2.0:
+
+- Rebrand the app to Lap Timer
+- Add support for long laps (up to 23 hours)
+- UX improvement
+- Better optimize the app for tablets
+- Minor bug fixes
+- Follow material design guidelines by google more closely
+
