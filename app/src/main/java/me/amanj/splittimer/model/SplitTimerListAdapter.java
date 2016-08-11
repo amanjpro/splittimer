@@ -217,7 +217,7 @@ public class SplitTimerListAdapter extends RecyclerView.Adapter<SplitTimerListAd
         } else {
 
             // we need to show the "normal" state
-            holder.itemView.setBackgroundColor(Color.WHITE);
+            holder.itemView.setBackgroundColor(Color.rgb(250, 250, 250));
             nameView.setVisibility(View.VISIBLE);
             timeView.setVisibility(View.VISIBLE);
             overflow.setVisibility(View.VISIBLE);
