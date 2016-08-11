@@ -35,7 +35,7 @@
     <string name="save_dialog_title">Enter a name for this entry</string>
     <string name="save_dialog_ok_text">Done</string>
     <string name="save_dialog_cancel_text">Cancel</string>
-    <string name="saved_list">Saved Laps</string>
+    <string name="saved_list">History</string>
     <string name="error_message_no_name">Please enter a name for this activity</string>
     <string name="merge_with_above">Merge with the above lap</string>
     <string name="merge_with_below">Merge with the below lap</string>
@@ -51,7 +51,7 @@
     <string name="fork_me_label">Developer page</string>
     <string name="navbar_settings">Settings</string>
     <string name="navbar_lap_on_stop">Lap on stop</string>
-    <string name="navbar_screen_orientation_switch">Screen rotation</string>
+    <string name="navbar_screen_orientation_switch">Allow rotation</string>
     <string name="navbar_about_app">About</string>
     <string name="fine_precision">1/1000 seconds</string>
     <string name="less_fine_precision">1/100 seconds</string>
