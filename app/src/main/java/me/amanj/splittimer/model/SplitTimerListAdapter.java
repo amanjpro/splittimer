@@ -57,6 +57,7 @@ import android.os.Handler;
 
 
 import org.greenrobot.eventbus.EventBus;
+import org.greenrobot.eventbus.Subscribe;
 
 import java.io.Serializable;
 import java.text.DateFormat;
@@ -67,6 +68,7 @@ import java.util.List;
 import java.util.Map;
 
 import me.amanj.splittimer.R;
+import me.amanj.splittimer.messages.Message;
 import me.amanj.splittimer.messages.MessageTag;
 import me.amanj.splittimer.messages.Send;
 import me.amanj.splittimer.ui.SaveDialog;
@@ -92,6 +94,7 @@ public class SplitTimerListAdapter extends RecyclerView.Adapter<SplitTimerListAd
     private final static String TAG = SplitTimerListAdapter.class.getCanonicalName();
 
     public SplitTimerListAdapter(Context context) {
+        bus.register(this);
         mContext = context;
     }
 
@@ -112,7 +115,8 @@ public class SplitTimerListAdapter extends RecyclerView.Adapter<SplitTimerListAd
 
     public void rename(String name, int position) {
         mItems.get(position).setName(name);
-        notifyItemChanged(position);
+        notifyDataSetChanged();
+        //notifyItemChanged(position);
     }
 
     public void remove(int index) {
@@ -347,25 +351,26 @@ public class SplitTimerListAdapter extends RecyclerView.Adapter<SplitTimerListAd
                         outer.updateShowFragment(index, MessageTag.DELETED);
                     return true;
                 case R.id.context_menu_rename_entry:
-                    SaveDialog newDialog = SaveDialog.newInstance(new ResultReceiver(null) {
+                    String name = ((TimeInformation) outer.getItem(index)).getName();
+                    SaveDialog newDialog = SaveDialog.newInstance(name, new ResultReceiver(null) {
                         @Override
                         protected void onReceiveResult(int resultCode, Bundle resultData) {
                             final String result = resultData.getString("name");
+                            Log.d(TAG, "Rename result received as: " + result);
                             if (resultCode == Activity.RESULT_OK) {
-                                outer.rename(result, index);
-                                if(outer.lastOpened == index) {
-                                    bus.post(new Send<String>() {
-                                        @Override
-                                        public String receive() {
-                                            return result;
-                                        }
+                                Log.d(TAG, "OK is received for rename");
+                                bus.post(new Send<Object[]>() {
+                                    @Override
+                                    public Object[] receive() {
+                                        return new Object[]{index, result};
+                                    }
 
-                                        @Override
-                                        public MessageTag tag() {
-                                            return MessageTag.RENAMED;
-                                        }
-                                    });
-                                }
+                                    @Override
+                                    public MessageTag tag() {
+                                        return MessageTag.RENAME;
+                                    }
+                                });
+
                             }
                         }
                     });
@@ -375,6 +380,31 @@ public class SplitTimerListAdapter extends RecyclerView.Adapter<SplitTimerListAd
                     return true;
                 default:
                     return false;
+            }
+        }
+    }
+
+
+
+    @Subscribe
+    public void onEvent(Message message) {
+        if(message.tag() == MessageTag.RENAME) {
+            Object[] sent = ((Send<Object[]>) message).receive();
+            final String result = (String) sent[1];
+            final Integer index = (Integer) sent[0];
+            rename(result, index);
+            if (lastOpened == index) {
+                bus.post(new Send<String>() {
+                    @Override
+                    public String receive() {
+                        return result;
+                    }
+
+                    @Override
+                    public MessageTag tag() {
+                        return MessageTag.RENAMED;
+                    }
+                });
             }
         }
     }

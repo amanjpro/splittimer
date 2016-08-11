@@ -53,10 +53,17 @@ public class SaveDialog extends DialogFragment {
 
     private ResultReceiver resultReceiver;
 
+    public static SaveDialog newInstance(String name, ResultReceiver receiver) {
+        SaveDialog dialog = newInstance(receiver);
+        dialog.getArguments().putBoolean("isRename", true);
+        dialog.getArguments().putString("name", name);
+        return dialog;
+    }
     public static SaveDialog newInstance(ResultReceiver receiver) {
         SaveDialog frag = new SaveDialog();
         Bundle args = new Bundle();
         args.putParcelable("receiver", receiver);
+        args.putBoolean("isRename", false);
         frag.setArguments(args);
         return frag;
     }
@@ -66,9 +73,18 @@ public class SaveDialog extends DialogFragment {
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setRetainInstance(true);
-        resultReceiver = getArguments().getParcelable("receiver");
+        if(savedInstanceState == null) {
+            resultReceiver = getArguments().getParcelable("receiver");
+        } else {
+            resultReceiver = savedInstanceState.getParcelable("receiver");
+        }
     }
 
+    @Override
+    public void onSaveInstanceState(Bundle outState) {
+        super.onSaveInstanceState(outState);
+        outState.putParcelable("receiver", resultReceiver);
+    }
 
 
     @Override
@@ -87,6 +103,12 @@ public class SaveDialog extends DialogFragment {
 
         final View view = inflater.inflate(R.layout.fragment_save_dialog, null);
         final EditText editView = (EditText) view.findViewById(R.id.save_name_edit);
+
+        if(getArguments() != null && getArguments().getBoolean("isRename")) {
+            editView.setText(getArguments().getString("name"));
+//            editView.selectAll();
+            editView.setSelectAllOnFocus(true);
+        }
 
         editView.setSingleLine();
         final InputMethodManager mgr = (InputMethodManager)
