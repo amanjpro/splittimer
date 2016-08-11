@@ -29,7 +29,7 @@
   -->
 
 <resources>
-    <string name="app_name">Split Timer</string>
+    <string name="app_name">Lap Timer</string>
     <string name="lap_ordinal_items">Lap %d</string>
     <string name="save_name_label">Entry name</string>
     <string name="save_dialog_title">Enter a name for this entry</string>

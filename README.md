@@ -1,6 +1,6 @@
-# Split Timer for android
+# Lap Timer for android
 
-A simple, yet modern split timer application for Android. Despite its usage of
+A simple, yet modern lap/split timer application for Android. Despite its usage of
 modern UI elements of Android, the app still manages to run on versions as early
 as 3.0 (Honeycomb).
 
