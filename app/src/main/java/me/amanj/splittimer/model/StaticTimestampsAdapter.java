@@ -48,6 +48,8 @@ import android.widget.TextView;
 
 
 import me.amanj.splittimer.R;
+import me.amanj.splittimer.util.TimeInformation;
+import me.amanj.splittimer.util.Timestamp;
 
 
 public class StaticTimestampsAdapter extends RecyclerView.Adapter<StaticTimestampsAdapter.ViewHolder> {

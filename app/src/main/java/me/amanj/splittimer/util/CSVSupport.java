@@ -28,7 +28,7 @@
  *  THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
 
-package me.amanj.splittimer.model;
+package me.amanj.splittimer.util;
 
 
 /**

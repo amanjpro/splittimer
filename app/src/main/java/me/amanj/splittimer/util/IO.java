@@ -45,9 +45,6 @@ import java.util.ArrayList;
 import java.util.List;
 
 import me.amanj.splittimer.R;
-import me.amanj.splittimer.model.CSVSupport;
-import me.amanj.splittimer.model.Configurations;
-import me.amanj.splittimer.model.TimeInformation;
 
 
 /**

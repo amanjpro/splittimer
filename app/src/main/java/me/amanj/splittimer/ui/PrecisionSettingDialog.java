@@ -32,24 +32,21 @@ package me.amanj.splittimer.ui;
 
 
 import android.app.Dialog;
-import android.app.FragmentManager;
 import android.content.DialogInterface;
 import android.os.Bundle;
 import android.support.v4.app.DialogFragment;
-import android.support.v4.app.Fragment;
 import android.support.v7.app.AlertDialog;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.RadioButton;
-import android.widget.RadioGroup;
 
 import org.greenrobot.eventbus.EventBus;
 
 import me.amanj.splittimer.R;
 import me.amanj.splittimer.messages.MessageTag;
 import me.amanj.splittimer.messages.Send;
-import me.amanj.splittimer.model.Configurations;
-import me.amanj.splittimer.model.Timestamp;
+import me.amanj.splittimer.util.Configurations;
+import me.amanj.splittimer.util.Timestamp;
 
 public class PrecisionSettingDialog extends DialogFragment {
 

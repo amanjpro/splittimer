@@ -57,9 +57,9 @@ import me.amanj.splittimer.util.IO;
 import me.amanj.splittimer.messages.Message;
 import me.amanj.splittimer.messages.Send;
 import me.amanj.splittimer.messages.MessageTag;
-import me.amanj.splittimer.model.Configurations;
+import me.amanj.splittimer.util.Configurations;
 import me.amanj.splittimer.model.SplitTimerFragmentAdapter;
-import me.amanj.splittimer.model.TimeInformation;
+import me.amanj.splittimer.util.TimeInformation;
 
 public class SplitTimerActivity extends AppCompatActivity {
 

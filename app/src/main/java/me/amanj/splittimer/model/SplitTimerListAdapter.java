@@ -60,7 +60,6 @@ import android.os.Handler;
 import org.greenrobot.eventbus.EventBus;
 import org.greenrobot.eventbus.Subscribe;
 
-import java.io.Serializable;
 import java.text.DateFormat;
 import java.util.ArrayList;
 import java.util.Date;
@@ -73,7 +72,9 @@ import me.amanj.splittimer.messages.Message;
 import me.amanj.splittimer.messages.MessageTag;
 import me.amanj.splittimer.messages.Send;
 import me.amanj.splittimer.ui.SaveDialog;
-import me.amanj.splittimer.ui.SplitTimerListFragment;
+import me.amanj.splittimer.util.CSVSupport;
+import me.amanj.splittimer.util.Configurations;
+import me.amanj.splittimer.util.TimeInformation;
 
 
 public class SplitTimerListAdapter extends RecyclerView.Adapter<SplitTimerListAdapter.ViewHolder> {

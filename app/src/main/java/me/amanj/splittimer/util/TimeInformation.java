@@ -28,17 +28,14 @@
  *  THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
 
-package me.amanj.splittimer.model;
+package me.amanj.splittimer.util;
 
 /**
  * Created by Amanj Sherwany on 8/4/16.
  */
 
 import java.io.Serializable;
-import java.sql.Array;
-import java.sql.Time;
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.List;
 
 public class TimeInformation implements Cloneable, Serializable {
@@ -123,7 +120,7 @@ public class TimeInformation implements Cloneable, Serializable {
     }
 
 
-    protected Object clone() {
+    public Object clone() {
         List<Long> laps = (List<Long>) ((ArrayList<Long>) this.laps).clone();
         TimeInformation res = new TimeInformation(this.name, this.storingTime);
         res.setLaps(laps);

@@ -33,8 +33,6 @@ package me.amanj.splittimer.util;
 import android.os.AsyncTask;
 import android.widget.TextView;
 
-import me.amanj.splittimer.model.Timestamp;
-
 /**
  * Created by Amanj Sherwany on 8/4/16.
  */

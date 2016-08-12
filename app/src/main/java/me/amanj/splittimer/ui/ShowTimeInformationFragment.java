@@ -30,8 +30,6 @@
 
 package me.amanj.splittimer.ui;
 
-import android.app.Activity;
-import android.content.res.Configuration;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
@@ -41,12 +39,10 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ListView;
 import android.widget.TextView;
 
 import org.greenrobot.eventbus.EventBus;
 import org.greenrobot.eventbus.Subscribe;
-import org.w3c.dom.Text;
 
 import java.text.DateFormat;
 import java.util.Date;
@@ -56,8 +52,8 @@ import me.amanj.splittimer.messages.Message;
 import me.amanj.splittimer.messages.MessageTag;
 import me.amanj.splittimer.messages.Send;
 import me.amanj.splittimer.model.StaticTimestampsAdapter;
-import me.amanj.splittimer.model.TimeInformation;
-import me.amanj.splittimer.model.Timestamp;
+import me.amanj.splittimer.util.TimeInformation;
+import me.amanj.splittimer.util.Timestamp;
 
 /**
  * Created by Amanj Sherwany on 8/6/16.
