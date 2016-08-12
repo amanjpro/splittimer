@@ -35,6 +35,8 @@ import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.os.Bundle;
 import android.support.v4.os.ResultReceiver;
+import android.support.v4.view.ViewCompat;
+import android.support.v4.widget.CompoundButtonCompat;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
@@ -123,12 +125,12 @@ public class TimerFragment extends Fragment {
         totalTimeDisplay.setText(Timestamp.timeStampToString(0l));
 
 
-        saveButton.setActivated(false);
+        ViewCompat.setActivated(saveButton, false);
         saveButton.setEnabled(false);
         saveButton.setClickable(false);
         lapButton.setEnabled(false);
         lapButton.setClickable(false);
-        lapButton.setActivated(false);
+        ViewCompat.setActivated(lapButton, false);
 
         actionButton.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -139,7 +141,7 @@ public class TimerFragment extends Fragment {
                     actionButton.setBackgroundResource(R.drawable.ic_action_stop);
                     saveButton.setBackgroundResource(R.drawable.ic_action_save_inactive);
                     lapButton.setBackgroundResource(R.drawable.ic_action_lap_active);
-                    lapButton.setActivated(true);
+                    ViewCompat.setActivated(lapButton, false);
                     lapButton.setEnabled(true);
                     lapButton.setClickable(true);
                     tstamp.start();
@@ -152,7 +154,7 @@ public class TimerFragment extends Fragment {
                     if(Configurations.shouldLapOnStop()) {
                         lapButton.setBackgroundResource(R.drawable.ic_action_lap_inactive);
                         timestampsAdapter.add(lastLap);
-                        lapButton.setActivated(false);
+                        ViewCompat.setActivated(lapButton, false);
                         lapButton.setEnabled(false);
                         lapButton.setClickable(false);
                         totalTimeDisplay.setText(
@@ -161,7 +163,7 @@ public class TimerFragment extends Fragment {
                     currentTimeView.setText(Timestamp.timeStampToString(0l));
                 }
                 isRunning = !isRunning;
-                saveButton.setActivated(!isRunning);
+                ViewCompat.setActivated(saveButton, !isRunning);
                 saveButton.setEnabled(!isRunning);
                 saveButton.setClickable(!isRunning);
             }
@@ -176,7 +178,7 @@ public class TimerFragment extends Fragment {
                     totalTimeDisplay.setText(
                             Timestamp.timeStampToString(tstamp.getElapsedTime()));
                     lapButton.setBackgroundResource(R.drawable.ic_action_lap_inactive);
-                    lapButton.setActivated(false);
+                    ViewCompat.setActivated(lapButton, false);
                     lapButton.setEnabled(false);
                     lapButton.setClickable(false);
                 }
@@ -284,7 +286,7 @@ public class TimerFragment extends Fragment {
             boolean lapState = savedInstanceState.getBoolean("lapState");
             boolean saveState = savedInstanceState.getBoolean("saveState");
 
-            lapButton.setActivated(lapState);
+            ViewCompat.setActivated(lapButton, lapState);
             lapButton.setEnabled(lapState);
             lapButton.setClickable(lapState);
             if(lapState) {
@@ -293,7 +295,7 @@ public class TimerFragment extends Fragment {
                 lapButton.setBackgroundResource(R.drawable.ic_action_lap_inactive);
             }
 
-            saveButton.setActivated(saveState);
+            ViewCompat.setActivated(saveButton, saveState);
             saveButton.setEnabled(saveState);
             saveButton.setClickable(saveState);
             if(saveState) {

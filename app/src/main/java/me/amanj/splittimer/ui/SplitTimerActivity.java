@@ -36,6 +36,7 @@ import android.content.res.Configuration;
 import android.net.Uri;
 import android.support.design.widget.NavigationView;
 import android.support.v4.view.GravityCompat;
+import android.support.v4.view.MenuItemCompat;
 import android.support.v4.view.ViewPager;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
@@ -142,7 +143,7 @@ public class SplitTimerActivity extends AppCompatActivity {
 
 
         final MenuItem item = nvDrawer.getMenu().findItem(R.id.nav_lap_on_stop_switch);
-        lapOnStopSwitch = (SwitchCompat) item.getActionView();
+        lapOnStopSwitch = (SwitchCompat) MenuItemCompat.getActionView(item);
         lapOnStopSwitch.setChecked(Configurations.shouldLapOnStop());
         lapOnStopSwitch.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
             @Override
@@ -152,10 +153,10 @@ public class SplitTimerActivity extends AppCompatActivity {
                 Log.i(TAG, "LapOnStop configuration set to: " + isChecked);
             }
         });
-        item.setActionView(lapOnStopSwitch);
+        MenuItemCompat.setActionView(item, lapOnStopSwitch);
 
         final MenuItem item2 = nvDrawer.getMenu().findItem(R.id.nav_screen_orientation_switch);
-        screenOrientationSwitch = (SwitchCompat) item2.getActionView();
+        screenOrientationSwitch = (SwitchCompat) MenuItemCompat.getActionView(item2);
         screenOrientationSwitch.setChecked(Configurations.isScreenRotationActivated());
         screenOrientationSwitch.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
             @Override
@@ -166,7 +167,7 @@ public class SplitTimerActivity extends AppCompatActivity {
                 Log.i(TAG, "ScreenOrientation configuration set to: " + isChecked);
             }
         });
-        item2.setActionView(screenOrientationSwitch);
+        MenuItemCompat.setActionView(item2, screenOrientationSwitch);
         setScreenOrientationSensor();
 
 
