@@ -41,6 +41,7 @@ import android.content.Context;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.support.v4.os.ResultReceiver;
+import android.support.v4.util.Pair;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.PopupMenu;
 import android.support.v7.widget.RecyclerView;
@@ -354,10 +355,10 @@ public class SplitTimerListAdapter extends RecyclerView.Adapter<SplitTimerListAd
                             Log.d(TAG, "Rename result received as: " + result);
                             if (resultCode == Activity.RESULT_OK) {
                                 Log.d(TAG, "OK is received for rename");
-                                bus.post(new Send<Object[]>() {
+                                bus.post(new Send<Pair<Integer, String>>() {
                                     @Override
-                                    public Object[] receive() {
-                                        return new Object[]{index, result};
+                                    public Pair<Integer, String> receive() {
+                                        return new Pair<>(index, result);
                                     }
 
                                     @Override
@@ -384,9 +385,9 @@ public class SplitTimerListAdapter extends RecyclerView.Adapter<SplitTimerListAd
     @Subscribe
     public void onEvent(Message message) {
         if(message.tag() == MessageTag.RENAME) {
-            Object[] sent = ((Send<Object[]>) message).receive();
-            final String result = (String) sent[1];
-            final Integer index = (Integer) sent[0];
+            Pair<Integer, String> sent = ((Send<Pair<Integer, String>>) message).receive();
+            final Integer index = sent.first;
+            final String result = sent.second;
             Log.d(TAG, "ItemCount: " + getItemCount());
             ((TimeInformation)getItem(index)).setName(result);
             notifyDataSetChanged();
