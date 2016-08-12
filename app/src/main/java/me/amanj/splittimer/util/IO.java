@@ -28,7 +28,7 @@
  *  THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
 
-package me.amanj.splittimer.control;
+package me.amanj.splittimer.util;
 
 import android.content.Context;
 import android.support.v7.widget.SwitchCompat;

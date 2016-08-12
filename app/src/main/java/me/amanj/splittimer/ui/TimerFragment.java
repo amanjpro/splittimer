@@ -49,7 +49,7 @@ import android.widget.TextView;
 
 
 import me.amanj.splittimer.R;
-import me.amanj.splittimer.control.TimeRunner;
+import me.amanj.splittimer.util.TimeRunner;
 import me.amanj.splittimer.messages.Message;
 import me.amanj.splittimer.messages.MessageTag;
 import me.amanj.splittimer.messages.Send;

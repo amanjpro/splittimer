@@ -53,7 +53,7 @@ import org.greenrobot.eventbus.Subscribe;
 
 
 import me.amanj.splittimer.R;
-import me.amanj.splittimer.control.IO;
+import me.amanj.splittimer.util.IO;
 import me.amanj.splittimer.messages.Message;
 import me.amanj.splittimer.messages.Send;
 import me.amanj.splittimer.messages.MessageTag;

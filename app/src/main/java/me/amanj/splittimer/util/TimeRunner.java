@@ -28,13 +28,10 @@
  *  THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
 
-package me.amanj.splittimer.control;
+package me.amanj.splittimer.util;
 
 import android.os.AsyncTask;
 import android.widget.TextView;
-
-import java.io.Serializable;
-import java.util.Timer;
 
 import me.amanj.splittimer.model.Timestamp;
 
