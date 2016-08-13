@@ -105,41 +105,18 @@ public class SplitTimerActivity extends AppCompatActivity {
                 getApplicationContext(), DEFAULT_FRAGMENT_NUMBER);
         bus.register(this);
         vpPager.setAdapter(adapterViewPager);
-//        vpPager.addOnPageChangeListener(new ViewPager.OnPageChangeListener() {
-//            @Override
-//            public void onPageScrolled(int position, float positionOffset, int positionOffsetPixels) {
-//                // dummy
-//            }
-//
-//            @Override
-//            public void onPageSelected(int position) {
-//                if(adapterViewPager.getCount() == 3
-//                        && position != adapterViewPager.getCount() - 1) {
-//                }
-//            }
-//
-//            @Override
-//            public void onPageScrollStateChanged(int state) {
-//                // dummy
-//            }
-//        });
-
 
         toolbar = (Toolbar) findViewById(R.id.toolbar);
 
         setSupportActionBar(toolbar);
 
         vpPager = (ViewPager) findViewById(R.id.vpPager);
-//        setupViewPager(vpPager);
 
         tabLayout = (TabLayout) findViewById(R.id.tabs);
         tabLayout.setupWithViewPager(vpPager);
 
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         getSupportActionBar().setHomeButtonEnabled(true);
-//        // Set a Toolbar to replace the ActionBar.
-//        toolbar = (Toolbar) findViewById(R.id.toolbar);
-//        setSupportActionBar(toolbar);
 
         // Find our drawer view
         mDrawer = (DrawerLayout) findViewById(R.id.drawer_layout);
@@ -213,14 +190,11 @@ public class SplitTimerActivity extends AppCompatActivity {
                         Configurations.PRECISION_DIALOG_TAG);
                 break;
             case R.id.nav_clear_history:
-                bus.post(new Send<Void>() {
-                    public MessageTag tag() { return MessageTag.CLEAR_HISTORY; }
-                    public Void receive() { return null; }
-                });
-                bus.post(new Send<Void>() {
-                    public MessageTag tag() { return MessageTag.REMOVE_LAST_FRAGMENT; }
-                    public Void receive() { return null; }
-                });
+                ClearHistoryConfirmationDialog clearHistoryDialog =
+                        new ClearHistoryConfirmationDialog();
+                mDrawer.closeDrawers();
+                clearHistoryDialog.show(getSupportFragmentManager(),
+                        Configurations.CLEAR_HISTORY_CONFIRMATION_TAG);
                 break;
             case R.id.nav_fork_me:
                 Intent github =

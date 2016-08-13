@@ -68,4 +68,5 @@
     <string name="single_item_display">Activity details</string>
     <string name="version_number">Version 2.0</string>
     <string name="button_undo">Undo</string>
+    <string name="clear_history_confirmation_message">Do you really want to clear history?</string>
 </resources>

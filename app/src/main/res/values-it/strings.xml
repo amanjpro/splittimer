@@ -69,4 +69,5 @@
     <string name="bad_configuration_file">Configurazioni salvate non possono essere caricati</string>
     <string name="bad_entry_file">Gli attiviti salvate non possono essere caricati</string>
     <string name="button_undo">Disfare</string>
+    <string name="clear_history_confirmation_message">Sei sicuro che vuoi cancellare i tuoi dati?</string>
 </resources>

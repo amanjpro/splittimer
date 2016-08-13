@@ -82,4 +82,5 @@ public class Configurations {
 
     public static final String PRECISION_DIALOG_TAG = "precisionDialog";
     public static final String SAVE_DIALOG_TAG = "saveDialog";
+    public static final String CLEAR_HISTORY_CONFIRMATION_TAG = "confirmClearHistoryDialog";
 }
