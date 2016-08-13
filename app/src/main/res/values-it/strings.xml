@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+  ~ Copyright (c) 2016, Amanj Sherwany <http://www.amanj.me>
+  ~ All rights reserved.
+  ~
+  ~ Redistribution and use in source and binary forms, with or without modification,
+  ~ are permitted provided that the following conditions are met:
+  ~
+  ~ 1. Redistributions of source code must retain the above copyright notice, this list
+  ~     of conditions and the following disclaimer.
+  ~
+  ~ 2. Redistributions in binary form must reproduce the above copyright notice, this list
+  ~     of conditions and the following disclaimer in the documentation and/or other
+  ~     materials provided with the distribution.
+  ~
+  ~ 3. Neither the name of the copyright holder nor the names of its contributors may be
+  ~     used to endorse or promote products derived from this software without specific prior
+  ~     written permission.
+  ~
+  ~ THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS"
+  ~ AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE
+  ~ IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE
+  ~ ARE DISCLAIMED. IN NO EVENT SHALL THE COPYRIGHT HOLDER OR CONTRIBUTORS BE LIABLE
+  ~ FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL
+  ~ DAMAGES (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR
+  ~ SERVICES; LOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED
+  ~ AND ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT
+  ~  (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF
+  ~  THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
+  -->
+
+<resources>
+    <string name="app_name">Cronometro</string>
+    <string name="version_number">Versione 2.0</string>
+    <string name="start_stop_caption">Comminciare/Firmare</string>
+    <string name="overflow_caption">Più...</string>
+    <string name="precision_setting_title">Controllo di precesione</string>
+    <string name="precision_label">Precesione</string>
+    <string name="delete_entry">Cancellare</string>
+    <string name="clear_history_label">Cancelare la storia</string>
+    <string name="saved_list">Storia</string>
+    <string name="drawer_close">Chiudere il cassetto di navigazione</string>
+    <string name="drawer_open">Aprire il cassetto di navigazione</string>
+    <string name="fine_precision">1/1000 secondi</string>
+    <string name="gross_precision">1/10 secondi</string>
+    <string name="less_fine_precision">1/100 secondi</string>
+    <string name="more_gross_precision">1 secondo</string>
+    <string name="error_message_no_name">Per fravore, entrare il nome dell\'attività</string>
+    <string name="fork_me_label">Il sito del programmatore</string>
+    <string name="lap_caption">Giro</string>
+    <string name="lap_ordinal_items">Giro %d</string>
+    <string name="list_caption_laps">Tempi sul giro</string>
+    <string name="list_caption_split">Tempi intermedi</string>
+    <string name="list_caption_titles">Giri</string>
+    <string name="text_view_elapsed_time_label">Tempo trascorso</string>
+    <string name="single_item_display">dettagli dell\'attività</string>
+    <string name="save_name_label">Il nome dell\'attività</string>
+    <string name="save_dialog_ok_text">Aposto</string>
+    <string name="save_dialog_cancel_text">Annulla</string>
+    <string name="rename_entry">rinominare</string>
+    <string name="save_caption">Salvare</string>
+    <string name="rate_me_label">Mi vota</string>
+    <string name="merge_with_above">Condersi con il giro sopra</string>
+    <string name="navbar_about_app">Riguardo il app</string>
+    <string name="navbar_lap_on_stop">Fare un giro sul firmare</string>
+    <string name="navbar_screen_orientation_switch">Permettere la rotazione</string>
+    <string name="navbar_settings">Impostazioni</string>
+    <string name="merge_with_below">Condersi con il giro in basso</string>
+    <string name="bad_configuration_file">Configurazioni salvate non possono essere caricati</string>
+    <string name="bad_entry_file">Gli attiviti salvate non possono essere caricati</string>
+</resources>
