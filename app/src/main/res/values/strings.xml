@@ -31,8 +31,7 @@
 <resources>
     <string name="app_name">Lap Timer</string>
     <string name="lap_ordinal_items">Lap %d</string>
-    <string name="save_name_label">Entry name</string>
-    <string name="save_dialog_title">Enter a name for this entry</string>
+    <string name="save_name_label">Activity name</string>
     <string name="save_dialog_ok_text">Done</string>
     <string name="save_dialog_cancel_text">Cancel</string>
     <string name="saved_list">History</string>
@@ -58,16 +57,14 @@
     <string name="gross_precision">1/10 seconds</string>
     <string name="more_gross_precision">1 second</string>
     <string name="precision_setting_title">Precision control</string>
-    <string name="entry_show_title">Entry</string>
     <string name="delete_entry">Delete</string>
     <string name="rename_entry">Rename</string>
-    <string name="button_undo">Undo</string>
-    <string name="bad_entry_file">Saved entries cannot be loaded</string>
+    <string name="bad_entry_file">Saved activities cannot be loaded</string>
     <string name="bad_configuration_file">Saved configurations cannot be loaded</string>
     <string name="save_caption">Save</string>
     <string name="start_stop_caption">Start/Stop</string>
     <string name="lap_caption">Lap</string>
     <string name="overflow_caption">More...</string>
-    <string name="single_item_display">Entry details</string>
+    <string name="single_item_display">Activity details</string>
     <string name="version_number">Version 2.0</string>
 </resources>
