@@ -70,7 +70,7 @@ public class TimerFragment extends Fragment {
 
     private static EventBus bus = EventBus.getDefault();
     private final static String TAG = TimerFragment.class.getCanonicalName();
-    private static int HALF_OPAQUE = 127;
+    private static int HALF_OPAQUE = 120;
     private static int FULL_OPAQUE = 255;
 
     // newInstance constructor for creating fragment with arguments
