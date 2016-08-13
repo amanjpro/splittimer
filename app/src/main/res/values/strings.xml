@@ -67,4 +67,5 @@
     <string name="overflow_caption">More...</string>
     <string name="single_item_display">Activity details</string>
     <string name="version_number">Version 2.0</string>
+    <string name="button_undo">Undo</string>
 </resources>
