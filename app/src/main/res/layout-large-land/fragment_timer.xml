@@ -60,7 +60,7 @@
             android:padding="10dp"
             android:layout_marginTop="40dp"
             android:layout_marginBottom="40dp"
-            android:background="#000000"
+            android:background="@color/colorDisplayBackground"
             android:textSize="@dimen/current_time_display"/>
 
 
@@ -76,7 +76,7 @@
             android:gravity="center"
             android:layout_marginBottom="20dp"
             android:layout_below="@+id/current_time_view"
-            android:padding="12dp"
+            android:padding="20dp"
             android:layout_centerHorizontal="true" />
 
 
@@ -90,7 +90,7 @@
             android:contentDescription="@string/lap_caption"
             android:layout_width="wrap_content"
             android:elevation="2dp"
-            android:padding="12dp"
+            android:padding="20dp"
             android:layout_marginTop="20dp"
             android:layout_marginBottom="20dp"
             android:layout_height="wrap_content"
@@ -111,7 +111,7 @@
             android:elevation="2dp"
             android:layout_height="wrap_content"
             android:layout_below="@+id/lap_button"
-            android:padding="12dp"
+            android:padding="20dp"
             android:contentDescription="@string/save_caption"
             android:enabled="false"
             android:clickable="false"/>
