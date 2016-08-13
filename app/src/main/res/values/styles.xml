@@ -31,10 +31,15 @@
 
 <resources>
     <!-- Base application theme. -->
-    <style name="AndroidTheme" parent="Theme.AppCompat.Light.NoActionBar">
+    <style name="SplitTimerTheme" parent="AndroidTheme.Base">
+    </style>
+
+    <style name="AndroidTheme.Base" parent="Theme.AppCompat.Light.DarkActionBar">
         <item name="colorPrimary">#673AB7</item>
         <item name="colorPrimaryDark">#512DA8</item>
         <item name="colorAccent">#FF4081</item>
+        <item name="windowNoTitle">true</item>
+        <item name="windowActionBar">false</item>
         <item name="drawerArrowStyle">@style/DrawerArrowStyle</item>
     </style>
     <style name="DrawerArrowStyle" parent="Widget.AppCompat.DrawerArrowToggle">

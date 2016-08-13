@@ -13,7 +13,7 @@
         android:icon="@mipmap/ic_launcher"
         android:label="@string/app_name"
         android:supportsRtl="true"
-        android:theme="@style/AndroidTheme">
+        android:theme="@style/SplitTimerTheme">
 
 
         <android:uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />

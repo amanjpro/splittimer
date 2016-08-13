@@ -35,6 +35,7 @@ import android.content.pm.ActivityInfo;
 import android.content.res.Configuration;
 import android.net.Uri;
 import android.support.design.widget.NavigationView;
+import android.support.design.widget.TabLayout;
 import android.support.v4.view.GravityCompat;
 import android.support.v4.view.MenuItemCompat;
 import android.support.v4.view.ViewPager;
@@ -66,6 +67,7 @@ public class SplitTimerActivity extends AppCompatActivity {
 
     private final int DEFAULT_FRAGMENT_NUMBER = 2;
     EventBus bus = EventBus.getDefault();
+    private TabLayout tabLayout;
     private SplitTimerFragmentAdapter adapterViewPager;
     private DrawerLayout mDrawer;
     private Toolbar toolbar;
@@ -122,9 +124,22 @@ public class SplitTimerActivity extends AppCompatActivity {
 //            }
 //        });
 
-        // Set a Toolbar to replace the ActionBar.
+
         toolbar = (Toolbar) findViewById(R.id.toolbar);
+
         setSupportActionBar(toolbar);
+
+        vpPager = (ViewPager) findViewById(R.id.vpPager);
+//        setupViewPager(vpPager);
+
+        tabLayout = (TabLayout) findViewById(R.id.tabs);
+        tabLayout.setupWithViewPager(vpPager);
+
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        getSupportActionBar().setHomeButtonEnabled(true);
+//        // Set a Toolbar to replace the ActionBar.
+//        toolbar = (Toolbar) findViewById(R.id.toolbar);
+//        setSupportActionBar(toolbar);
 
         // Find our drawer view
         mDrawer = (DrawerLayout) findViewById(R.id.drawer_layout);
@@ -136,8 +151,6 @@ public class SplitTimerActivity extends AppCompatActivity {
         // Setup drawer view
         setupDrawerContent(nvDrawer);
 
-        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
-        getSupportActionBar().setHomeButtonEnabled(true);
         mDrawer.addDrawerListener(drawerToggle);
 
 
