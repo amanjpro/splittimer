@@ -37,5 +37,6 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_margin="10dp"
+        android:textSize="@dimen/list_item_large"
         android:text="@string/clear_history_confirmation_message"/>
 </LinearLayout>
