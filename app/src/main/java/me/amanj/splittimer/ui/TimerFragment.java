@@ -70,6 +70,8 @@ public class TimerFragment extends Fragment {
 
     private static EventBus bus = EventBus.getDefault();
     private final static String TAG = TimerFragment.class.getCanonicalName();
+    private static int HALF_OPAQUE = 127;
+    private static int FULL_OPAQUE = 255;
 
     // newInstance constructor for creating fragment with arguments
     public static TimerFragment newInstance() {
@@ -124,6 +126,8 @@ public class TimerFragment extends Fragment {
         currentTimeView.setText(Timestamp.timeStampToString(0l));
         totalTimeDisplay.setText(Timestamp.timeStampToString(0l));
 
+        saveButton.getBackground().setAlpha(HALF_OPAQUE);
+        lapButton.getBackground().setAlpha(HALF_OPAQUE);
 
         ViewCompat.setActivated(saveButton, false);
         saveButton.setEnabled(false);
@@ -139,8 +143,8 @@ public class TimerFragment extends Fragment {
                     timestampsAdapter.clear();
                     runner = new TimeRunner(currentTimeView, totalTimeDisplay);
                     actionButton.setBackgroundResource(R.drawable.ic_action_stop);
-                    saveButton.setBackgroundResource(R.drawable.ic_action_save_inactive);
-                    lapButton.setBackgroundResource(R.drawable.ic_action_lap_active);
+                    saveButton.getBackground().setAlpha(HALF_OPAQUE);
+                    lapButton.getBackground().setAlpha(FULL_OPAQUE);
                     ViewCompat.setActivated(lapButton, false);
                     lapButton.setEnabled(true);
                     lapButton.setClickable(true);
@@ -148,11 +152,11 @@ public class TimerFragment extends Fragment {
                     runner.execute(tstamp);
                 } else {
                     actionButton.setBackgroundResource(R.drawable.ic_action_play);
-                    saveButton.setBackgroundResource(R.drawable.ic_action_save_active);
+                    saveButton.getBackground().setAlpha(FULL_OPAQUE);
                     long lastLap = tstamp.stop();
                     runner.cancel(true);
                     if(Configurations.shouldLapOnStop()) {
-                        lapButton.setBackgroundResource(R.drawable.ic_action_lap_inactive);
+                        lapButton.getBackground().setAlpha(HALF_OPAQUE);
                         timestampsAdapter.add(lastLap);
                         ViewCompat.setActivated(lapButton, false);
                         lapButton.setEnabled(false);
@@ -177,7 +181,7 @@ public class TimerFragment extends Fragment {
                 if(!isRunning) {
                     totalTimeDisplay.setText(
                             Timestamp.timeStampToString(tstamp.getElapsedTime()));
-                    lapButton.setBackgroundResource(R.drawable.ic_action_lap_inactive);
+                    lapButton.getBackground().setAlpha(HALF_OPAQUE);
                     ViewCompat.setActivated(lapButton, false);
                     lapButton.setEnabled(false);
                     lapButton.setClickable(false);
@@ -290,18 +294,18 @@ public class TimerFragment extends Fragment {
             lapButton.setEnabled(lapState);
             lapButton.setClickable(lapState);
             if(lapState) {
-                lapButton.setBackgroundResource(R.drawable.ic_action_lap_active);
+                lapButton.getBackground().setAlpha(FULL_OPAQUE);
             } else {
-                lapButton.setBackgroundResource(R.drawable.ic_action_lap_inactive);
+                lapButton.getBackground().setAlpha(HALF_OPAQUE);
             }
 
             ViewCompat.setActivated(saveButton, saveState);
             saveButton.setEnabled(saveState);
             saveButton.setClickable(saveState);
             if(saveState) {
-                saveButton.setBackgroundResource(R.drawable.ic_action_save_active);
+                saveButton.getBackground().setAlpha(FULL_OPAQUE);
             } else {
-                saveButton.setBackgroundResource(R.drawable.ic_action_save_inactive);
+                saveButton.getBackground().setAlpha(HALF_OPAQUE);
             }
 
             if(isRunning) {

@@ -68,7 +68,7 @@
         <ImageButton
             android:id="@+id/save_button"
             android:src="@drawable/ic_action_transparent"
-            android:background="@drawable/ic_action_save_inactive"
+            android:background="@drawable/ic_action_save_active"
             android:layout_width="wrap_content"
             android:elevation="2dp"
             android:gravity="center"
@@ -101,7 +101,7 @@
         <ImageButton
             android:id="@+id/lap_button"
             android:src="@drawable/ic_action_transparent"
-            android:background="@drawable/ic_action_lap_inactive"
+            android:background="@drawable/ic_action_lap_active"
             android:gravity="center"
             android:elevation="2dp"
             android:contentDescription="@string/lap_caption"
