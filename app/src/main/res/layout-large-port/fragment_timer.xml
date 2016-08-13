@@ -35,8 +35,6 @@
     android:id="@+id/fragment_timer"
     android:layout_width="match_parent"
     android:paddingTop="40dp"
-    android:paddingLeft="10dp"
-    android:paddingStart="10dp"
     android:layout_height="wrap_content"
     android:orientation="vertical" >
 
@@ -45,8 +43,6 @@
     <RelativeLayout
         android:layout_width="match_parent"
         android:id="@+id/timer_header_layout"
-        android:paddingRight="10dp"
-        android:paddingEnd="10dp"
         android:paddingBottom="40dp"
         android:orientation="vertical"
         android:layout_height="wrap_content">
@@ -116,12 +112,8 @@
             android:layout_alignParentRight="true" />
 
     </RelativeLayout>
-    <RelativeLayout android:layout_below="@id/timer_header_layout"
+    <include layout="@layout/lap_times_information_display"
+        android:layout_below="@id/timer_header_layout"
         android:layout_width="match_parent"
-        android:layout_marginTop="30dp"
-        android:layout_height="wrap_content">
-        <include layout="@layout/lap_times_information_display"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent" />
-    </RelativeLayout>
+        android:layout_height="match_parent" />
 </RelativeLayout>

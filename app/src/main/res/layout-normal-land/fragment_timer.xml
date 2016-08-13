@@ -122,12 +122,9 @@
 
 
     </RelativeLayout>
-    <RelativeLayout
-        android:layout_width="0dp"
+    <include layout="@layout/lap_times_information_display"
+        android:layout_below="@id/timer_header_layout"
         android:layout_weight="2"
-        android:layout_height="wrap_content">
-        <include layout="@layout/lap_times_information_display"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent" />
-    </RelativeLayout>
+        android:layout_width="0dp"
+        android:layout_height="match_parent" />
 </LinearLayout>
