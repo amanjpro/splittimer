@@ -48,12 +48,14 @@ import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.view.MenuItem;
 import android.widget.CompoundButton;
+import android.widget.TextView;
 
 import org.greenrobot.eventbus.EventBus;
 import org.greenrobot.eventbus.Subscribe;
+import org.w3c.dom.Text;
 
 
-
+import me.amanj.splittimer.BuildConfig;
 import me.amanj.splittimer.R;
 import me.amanj.splittimer.util.IO;
 import me.amanj.splittimer.messages.Message;
@@ -129,6 +131,9 @@ public class SplitTimerActivity extends AppCompatActivity {
         setupDrawerContent(nvDrawer);
 
         mDrawer.addDrawerListener(drawerToggle);
+
+        ((TextView) nvDrawer.getHeaderView(0).findViewById(R.id.nav_version_label)).setText(
+                getResources().getString(R.string.version_number, BuildConfig.VERSION_NAME));
 
 
 

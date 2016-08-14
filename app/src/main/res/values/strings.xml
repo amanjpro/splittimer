@@ -66,7 +66,7 @@
     <string name="lap_caption">Lap</string>
     <string name="overflow_caption">More...</string>
     <string name="single_item_display">Activity details</string>
-    <string name="version_number">Version 2.0</string>
+    <string name="version_number">Version %s</string>
     <string name="button_undo">Undo</string>
     <string name="clear_history_confirmation_message">Do you really want to clear history?</string>
 </resources>

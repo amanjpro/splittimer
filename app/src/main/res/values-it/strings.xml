@@ -31,7 +31,7 @@
 
 <resources>
     <string name="app_name">Cronometro</string>
-    <string name="version_number">Versione 2.0</string>
+    <string name="version_number">Versione %s</string>
     <string name="start_stop_caption">Comminciare/Firmare</string>
     <string name="overflow_caption">Più...</string>
     <string name="precision_setting_title">Controllo di precesione</string>
