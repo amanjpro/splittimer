@@ -64,7 +64,7 @@ public class ShowTimeInformationFragment extends Fragment {
     private TextView totalTimeDisplay, name;
     private RecyclerView recyclerView;
     private StaticTimestampsAdapter timestampsAdapter;
-    private final static String TAG = ShowTimeInformationFragment.class.getCanonicalName();
+    final static String TAG = ShowTimeInformationFragment.class.getCanonicalName();
 
     // newInstance constructor for creating fragment with arguments
     public static ShowTimeInformationFragment newInstance() {

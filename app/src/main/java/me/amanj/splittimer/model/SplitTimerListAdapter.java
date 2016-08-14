@@ -195,7 +195,7 @@ public class SplitTimerListAdapter extends RecyclerView.Adapter<SplitTimerListAd
             // we need to show the "undo" state of the row
             holder.itemView.setBackgroundColor(Color.GRAY);
             nameView.setVisibility(View.INVISIBLE);
-            timeView.setVisibility(View.GONE);
+            timeView.setVisibility(View.INVISIBLE);
             overflow.setVisibility(View.GONE);
             undoButton.setVisibility(View.VISIBLE);
             undoButton.setOnClickListener(new View.OnClickListener() {

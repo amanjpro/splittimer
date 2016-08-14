@@ -82,19 +82,19 @@ public class SplitTimerActivity extends AppCompatActivity {
     @Override
     public void onSaveInstanceState(Bundle outState) {
         super.onSaveInstanceState(outState);
-        outState.putBoolean("stored", adapterViewPager.getCount() > DEFAULT_FRAGMENT_NUMBER);
-        outState.putBoolean("shouldGo", vpPager.getCurrentItem() == DEFAULT_FRAGMENT_NUMBER);
+//        outState.putBoolean("stored", adapterViewPager.getCount() > DEFAULT_FRAGMENT_NUMBER);
+//        outState.putBoolean("shouldGo", vpPager.getCurrentItem() == DEFAULT_FRAGMENT_NUMBER);
     }
 
     @Override
     protected void onRestoreInstanceState(Bundle savedInstanceState) {
         super.onRestoreInstanceState(savedInstanceState);
-        if(savedInstanceState != null && savedInstanceState.getBoolean("stored")) {
-            adapterViewPager.addFragment();
-            if (savedInstanceState.getBoolean("shouldGo")) {
-                vpPager.setCurrentItem(DEFAULT_FRAGMENT_NUMBER);
-            }
-        }
+//        if(savedInstanceState != null && savedInstanceState.getBoolean("stored")) {
+//            adapterViewPager.addFragment();
+//            if (savedInstanceState.getBoolean("shouldGo")) {
+//                vpPager.setCurrentItem(DEFAULT_FRAGMENT_NUMBER);
+//            }
+//        }
 
     }
 
@@ -133,7 +133,7 @@ public class SplitTimerActivity extends AppCompatActivity {
         mDrawer.addDrawerListener(drawerToggle);
 
         ((TextView) nvDrawer.getHeaderView(0).findViewById(R.id.nav_version_label)).setText(
-                getResources().getString(R.string.version_number, BuildConfig.VERSION_NAME));
+                getString(R.string.version_number, BuildConfig.VERSION_NAME));
 
 
 
@@ -221,22 +221,9 @@ public class SplitTimerActivity extends AppCompatActivity {
 
     @Subscribe
     public void onEvent(final Message event) {
-        if(event.tag() == MessageTag.OPEN) {
-            TimeInformation lastOpened = ((Send<TimeInformation>) event).receive();
-            if(lastOpened != null) {
-                openTimeInformation(lastOpened);
-                vpPager.setCurrentItem(DEFAULT_FRAGMENT_NUMBER);
-            }
-        } else if(event.tag() == MessageTag.REMOVE_LAST_FRAGMENT) {
-            if(adapterViewPager.getCount() > DEFAULT_FRAGMENT_NUMBER)
-                adapterViewPager.removeLastFragment();
-        } else if(event.tag() == MessageTag.MAYBE_OPEN) {
-            if(adapterViewPager.getCount() > DEFAULT_FRAGMENT_NUMBER) {
-                TimeInformation lastOpened = ((Send<TimeInformation>) event).receive();
-                if(lastOpened != null)
-                    openTimeInformation(lastOpened);
-                //vpPager.setCurrentItem(DEFAULT_FRAGMENT_NUMBER - 1);
-            }
+        if(event.tag() == MessageTag.REMOVE_LAST_FRAGMENT) {
+//            if(adapterViewPager.getCount() > DEFAULT_FRAGMENT_NUMBER)
+//                adapterViewPager.removeLastFragment();
         }
     }
 
@@ -246,18 +233,6 @@ public class SplitTimerActivity extends AppCompatActivity {
                 R.string.drawer_open,  R.string.drawer_close);
     }
 
-
-    public void openTimeInformation(final TimeInformation tinfo) {
-        if(adapterViewPager.getCount() == DEFAULT_FRAGMENT_NUMBER) {
-            adapterViewPager.addFragment();
-        }
-        bus.post(new Send<TimeInformation>() {
-            public MessageTag tag() { return MessageTag.SHOW; }
-            public TimeInformation receive() {
-                return tinfo;
-            }
-        });
-    }
 
 
     // NOTE! Make sure to override the method with only a single `Bundle` argument

@@ -36,6 +36,7 @@ import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentStatePagerAdapter;
 
 import me.amanj.splittimer.R;
+import me.amanj.splittimer.ui.ShowHistoryFragment;
 import me.amanj.splittimer.ui.ShowTimeInformationFragment;
 import me.amanj.splittimer.ui.SplitTimerListFragment;
 import me.amanj.splittimer.ui.TimerFragment;
@@ -64,15 +65,6 @@ public class SplitTimerFragmentAdapter extends FragmentStatePagerAdapter {
         return POSITION_NONE;
     }
 
-    public void removeLastFragment() {
-        FRAGMENT_COUNT -= 1;
-        notifyDataSetChanged();
-    }
-
-    public void addFragment() {
-        FRAGMENT_COUNT += 1;
-        notifyDataSetChanged();
-    }
 
     @Override
     public Fragment getItem(int position) {
@@ -80,9 +72,9 @@ public class SplitTimerFragmentAdapter extends FragmentStatePagerAdapter {
             case 0:
                 return TimerFragment.newInstance();
             case 1:
-                return SplitTimerListFragment.newInstance();
+                return ShowHistoryFragment.newInstance();
             default:
-                return ShowTimeInformationFragment.newInstance();
+                return null;
         }
     }
 
@@ -94,7 +86,7 @@ public class SplitTimerFragmentAdapter extends FragmentStatePagerAdapter {
             case 1:
                 return mContext.getString(R.string.saved_list);
             default:
-                return mContext.getString(R.string.single_item_display);
+                return null;
         }
     }
 
