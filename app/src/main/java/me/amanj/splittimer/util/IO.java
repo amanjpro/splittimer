@@ -31,6 +31,7 @@
 package me.amanj.splittimer.util;
 
 import android.content.Context;
+import android.net.ParseException;
 import android.support.v7.widget.SwitchCompat;
 import android.util.Log;
 import android.widget.Toast;
@@ -81,8 +82,10 @@ public class IO {
                 Log.i(TAG, "Should screen be fixed is loaded as: " + line);
             }
 
-        } catch (IOException e) {
+        } catch (ParseException e) {
             Toast.makeText(context, R.string.bad_configuration_file, Toast.LENGTH_SHORT).show();
+        } catch (IOException e) {
+            // do nothing
         } finally {
             if (null != reader) {
                 try {
@@ -111,9 +114,10 @@ public class IO {
                 }
             }
 
-        } catch (IOException e) {
+        } catch (ParseException e) {
             Toast.makeText(context, R.string.bad_entry_file, Toast.LENGTH_SHORT).show();
             Log.i(TAG, "Error in loading entries");
+        } catch (IOException e) {
         } finally {
             if (null != reader) {
                 try {
