@@ -35,7 +35,7 @@ android {
     buildToolsVersion "24.0.1"
     defaultConfig {
         applicationId "me.amanj.splittimer"
-        minSdkVersion 11
+        minSdkVersion 8
         targetSdkVersion 24
         versionCode 3
         versionName "3.0"
