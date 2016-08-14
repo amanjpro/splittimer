@@ -143,7 +143,8 @@ public class ShowTimeInformationFragment extends Fragment {
     public String getTitle() {
         if(timestampsAdapter == null) return "";
         Date date = new Date(timestampsAdapter.getStoringTime());
-        return timestampsAdapter.getName() + " - " + DateFormat.getInstance().format(date);
+        return getResources().getString(R.string.single_item_title,
+                timestampsAdapter.getName(), DateFormat.getInstance().format(date));
     }
 
     @Subscribe

@@ -65,7 +65,7 @@
     <string name="start_stop_caption">Start/Stop</string>
     <string name="lap_caption">Lap</string>
     <string name="overflow_caption">More...</string>
-    <string name="single_item_display">Activity details</string>
+    <string name="single_item_title">%1$s at %2$s</string>
     <string name="version_number">Version %s</string>
     <string name="button_undo">Undo</string>
     <string name="clear_history_confirmation_message">Do you really want to clear history?</string>

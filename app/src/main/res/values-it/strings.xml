@@ -53,7 +53,6 @@
     <string name="list_caption_split">Tempi intermedi</string>
     <string name="list_caption_titles">Giri</string>
     <string name="text_view_elapsed_time_label">Tempo trascorso</string>
-    <string name="single_item_display">dettagli dell\'attività</string>
     <string name="save_name_label">Il nome dell\'attività</string>
     <string name="save_dialog_ok_text">Aposto</string>
     <string name="save_dialog_cancel_text">Annulla</string>
@@ -70,4 +69,5 @@
     <string name="bad_entry_file">Gli attiviti salvate non possono essere caricati</string>
     <string name="button_undo">Disfare</string>
     <string name="clear_history_confirmation_message">Sei sicuro che vuoi cancellare i tuoi dati?</string>
+    <string name="single_item_title">%1$s al %2$s</string>
 </resources>
