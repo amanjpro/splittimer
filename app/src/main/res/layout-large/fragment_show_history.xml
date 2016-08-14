@@ -43,6 +43,10 @@
 
     <FrameLayout
         android:id="@+id/detail_frag"
+        android:elevation="2dp"
+        android:outlineProvider="bounds"
+        android:paddingLeft="10dp"
+        android:paddingStart="10dp"
         android:layout_width="0dp"
         android:layout_height="match_parent" />
 
