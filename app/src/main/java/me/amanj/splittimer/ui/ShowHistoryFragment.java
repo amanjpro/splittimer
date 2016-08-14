@@ -35,6 +35,7 @@ import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -56,6 +57,7 @@ import me.amanj.splittimer.util.TimeInformation;
 public class ShowHistoryFragment extends Fragment {
     EventBus bus = EventBus.getDefault();
 
+    private static final String TAG = ShowTimeInformationFragment.class.getCanonicalName();
     private SplitTimerListFragment splitTimerListFragment;
     private ShowTimeInformationFragment showTimeInformationFragment;
     private View rootView;
@@ -77,19 +79,13 @@ public class ShowHistoryFragment extends Fragment {
     }
 
     @Override
-    public void onSaveInstanceState(Bundle outState) {
-        super.onSaveInstanceState(outState);
-//        outState.putBoolean("recreateFragmentDetail",
-//                inTwoPanesMode() && showTimeInformationFragment.isAdded());
+    public void onSaveInstanceState(Bundle savedInstanceState) {
+        super.onSaveInstanceState(savedInstanceState);
     }
+
     @Override
     public void onActivityCreated(Bundle savedInstanceState) {
-        setRetainInstance(true);
         super.onActivityCreated(savedInstanceState);
-//        if(savedInstanceState != null &&
-//                savedInstanceState.getBoolean("recreateFragmentDetail"))
-//            getFragmentManager().beginTransaction().add(R.id.detail_frag,
-//                    showTimeInformationFragment);
     }
 
     public static ShowHistoryFragment newInstance() {
@@ -101,6 +97,7 @@ public class ShowHistoryFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
+        setRetainInstance(true);
         super.onCreateView(inflater, container, savedInstanceState);
         rootView = inflater.inflate(R.layout.fragment_show_history, container, false);
 
@@ -111,12 +108,16 @@ public class ShowHistoryFragment extends Fragment {
         showTimeInformationFragment = (ShowTimeInformationFragment)
                 mFragmentManager.findFragmentByTag(ShowTimeInformationFragment.TAG);
 
+
         if(splitTimerListFragment == null) {
+            Log.d(TAG, "New instance of SplitTimerListFragment");
             splitTimerListFragment = SplitTimerListFragment.newInstance();
         }
+
         if(showTimeInformationFragment == null) {
             showTimeInformationFragment = ShowTimeInformationFragment.newInstance();
         }
+
 
         boolean inTwoPanesMode = inTwoPanesMode();
 
@@ -131,12 +132,22 @@ public class ShowHistoryFragment extends Fragment {
                         setLayout();
                     }
                 });
+        } else {
+            mFragmentManager.addOnBackStackChangedListener(
+                new FragmentManager.OnBackStackChangedListener() {
+                    public void onBackStackChanged() {
+                        splitTimerListFragment.unsetLastOpen();
+                    }
+                });
         }
 
         if(savedInstanceState != null) {
-            setLayout();
+            if(inTwoPanesMode) {
+                setLayout();
+            }
             return rootView;
         }
+
 
         if(!inTwoPanesMode) {
             FragmentTransaction transaction = mFragmentManager.beginTransaction();
@@ -144,12 +155,10 @@ public class ShowHistoryFragment extends Fragment {
                     splitTimerListFragment, SplitTimerListFragment.TAG);
             transaction.commit();
         } else {
-
             FragmentTransaction fragmentTransaction = mFragmentManager.beginTransaction();
             fragmentTransaction.add(R.id.list_frag, splitTimerListFragment,
                     SplitTimerListFragment.TAG);
             fragmentTransaction.commit();
-
         }
 
 
@@ -162,21 +171,22 @@ public class ShowHistoryFragment extends Fragment {
         if (event.tag() == MessageTag.OPEN) {
             TimeInformation lastOpened = ((Send<TimeInformation>) event).receive();
 
-            if (showTimeInformationFragment == null)
-                showTimeInformationFragment = ShowTimeInformationFragment.newInstance();
-
-            FragmentTransaction transaction = mFragmentManager.beginTransaction();
             if (!inTwoPanesMode()) {
-                transaction.replace(R.id.fragment_container,
+                FragmentTransaction transaction = mFragmentManager.beginTransaction();
+                transaction.hide(splitTimerListFragment);
+                transaction.add(R.id.fragment_container,
                         showTimeInformationFragment, ShowTimeInformationFragment.TAG);
-            } else if (!showTimeInformationFragment.isAdded()) {
-
+                transaction.addToBackStack(null);
+                transaction.commit();
+                mFragmentManager.executePendingTransactions();
+            } else if (inTwoPanesMode() && !showTimeInformationFragment.isAdded()) {
+                FragmentTransaction transaction = mFragmentManager.beginTransaction();
                 transaction.add(R.id.detail_frag,
                         showTimeInformationFragment, ShowTimeInformationFragment.TAG);
+                transaction.addToBackStack(null);
+                transaction.commit();
+                mFragmentManager.executePendingTransactions();
             }
-            transaction.addToBackStack(null);
-            transaction.commit();
-            mFragmentManager.executePendingTransactions();
             openTimeInformation(lastOpened);
         } else if (event.tag() == MessageTag.REMOVE_DETAILED_PANE) {
             if(inTwoPanesMode()) {
