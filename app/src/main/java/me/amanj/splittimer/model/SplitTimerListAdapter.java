@@ -38,6 +38,7 @@ package me.amanj.splittimer.model;
 
 import android.app.Activity;
 import android.content.Context;
+import android.content.res.Resources;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.support.v4.os.ResultReceiver;
@@ -45,7 +46,9 @@ import android.support.v4.util.Pair;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.PopupMenu;
 import android.support.v7.widget.RecyclerView;
+import android.support.v7.widget.ThemedSpinnerAdapter;
 import android.util.Log;
+import android.util.TypedValue;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
@@ -214,7 +217,11 @@ public class SplitTimerListAdapter extends RecyclerView.Adapter<SplitTimerListAd
         } else {
 
             // we need to show the "normal" state
-            holder.itemView.setBackgroundColor(Color.rgb(250, 250, 250));
+            if(lastOpened == position) {
+                holder.itemView.setBackgroundColor(mContext.getResources().getColor(R.color.colorPrimaryLight));
+            } else{
+                holder.itemView.setBackgroundColor(Color.rgb(250, 250, 250));
+            }
             nameView.setVisibility(View.VISIBLE);
             timeView.setVisibility(View.VISIBLE);
             overflow.setVisibility(View.VISIBLE);
@@ -247,6 +254,7 @@ public class SplitTimerListAdapter extends RecyclerView.Adapter<SplitTimerListAd
                             return tinfo;
                         }
                     });
+                    notifyDataSetChanged();
                 }
             });
         }

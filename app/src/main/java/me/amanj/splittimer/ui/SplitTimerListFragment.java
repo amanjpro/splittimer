@@ -81,8 +81,8 @@ public class SplitTimerListFragment extends Fragment {
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
         setRetainInstance(true);
+        super.onCreate(savedInstanceState);
     }
 
     @Override
@@ -298,12 +298,12 @@ public class SplitTimerListFragment extends Fragment {
         outState.putInt("lastOpened", mAdapter.getLastOpened());
         outState.putBoolean("laterStart", true);
     }
+
     @Override
     public void onActivityCreated(Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
 
         recyclerView.setDescendantFocusability(ViewGroup.FOCUS_BLOCK_DESCENDANTS);
-        setRetainInstance(true);
         if(savedInstanceState != null) {
             laterStart = savedInstanceState.getBoolean("laterStart");
             mAdapter.setLastOpened(savedInstanceState.getInt("lastOpened"));
@@ -320,15 +320,19 @@ public class SplitTimerListFragment extends Fragment {
 
     }
 
+    public void unsetLastOpen() {
+        mAdapter.setLastOpened(-1);
+    }
 
 
     @Subscribe
     public void onEvent(Message event) {
         if (event.tag() == MessageTag.SAVE)
             mAdapter.add(((Send<TimeInformation>) event).receive());
-        else if(event.tag() == MessageTag.CLEAR_HISTORY)
+        else if (event.tag() == MessageTag.CLEAR_HISTORY) {
             mAdapter.clear();
-        else if(event.tag() == MessageTag.DELETED || event.tag() == MessageTag.SWIPED) {
+            removeDetailedPane();
+        } else if(event.tag() == MessageTag.DELETED || event.tag() == MessageTag.SWIPED) {
             int index     = ((Send<Integer>) event).receive();
             if((mAdapter.getItemCount() > 0 && event.tag() == MessageTag.DELETED) ||
                     (mAdapter.getItemCount() > 1 && event.tag() == MessageTag.SWIPED)) {
@@ -342,20 +346,24 @@ public class SplitTimerListFragment extends Fragment {
                     }
                 });
             } else {
-                bus.post(new Send<Void>() {
-                    public MessageTag tag() {
-                        return MessageTag.REMOVE_DETAILED_PANE;
-                    }
-
-                    public Void receive() {
-                        return null;
-                    }
-                });
+                removeDetailedPane();
             }
         }
     }
 
 
+    private void removeDetailedPane() {
+        mAdapter.setLastOpened(-1);
+        bus.post(new Send<Void>() {
+            public MessageTag tag() {
+                return MessageTag.REMOVE_DETAILED_PANE;
+            }
+
+            public Void receive() {
+                return null;
+            }
+        });
+    }
     @Override
     public void onResume() {
         super.onResume();
