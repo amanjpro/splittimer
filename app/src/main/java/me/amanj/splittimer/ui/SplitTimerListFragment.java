@@ -67,7 +67,6 @@ public class SplitTimerListFragment extends Fragment {
 
     EventBus bus = EventBus.getDefault();
     private SplitTimerListAdapter mAdapter;
-    private boolean laterStart = false;
     private RecyclerView recyclerView;
     final static String TAG = SplitTimerListFragment.class.getCanonicalName();
 
@@ -88,6 +87,7 @@ public class SplitTimerListFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         super.onCreateView(inflater, container, savedInstanceState);
+        setRetainInstance(true);
 
         View rootView = inflater.inflate(R.layout.fragment_stored_splittimer_list, container, false);
         LinearLayoutManager llm = new LinearLayoutManager(this.getContext());
@@ -305,7 +305,6 @@ public class SplitTimerListFragment extends Fragment {
 
         recyclerView.setDescendantFocusability(ViewGroup.FOCUS_BLOCK_DESCENDANTS);
         if(savedInstanceState != null) {
-            laterStart = savedInstanceState.getBoolean("laterStart");
             mAdapter.setLastOpened(savedInstanceState.getInt("lastOpened"));
             String[] timeInfos = savedInstanceState.getString("timeInfos").split("\n");
             Log.d(TAG, "Restored the timeInfos, size is: " + timeInfos.length);
@@ -368,7 +367,7 @@ public class SplitTimerListFragment extends Fragment {
     public void onResume() {
         super.onResume();
         bus.register(this);
-        if(!laterStart) {
+        if(mAdapter.getItemCount() == 0) {
             Log.i(TAG, "Loading entries command is being executed:  " + mAdapter.getItemCount());
             mAdapter.addAll(IO.loadEntries(getContext()));
             Log.i(TAG, "Loading entries command has executed:  " + mAdapter.getItemCount());

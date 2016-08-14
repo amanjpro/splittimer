@@ -164,6 +164,7 @@ public class SplitTimerListAdapter extends RecyclerView.Adapter<SplitTimerListAd
     }
 
     public boolean isPendingRemoval(int position) {
+        if(position < 0 || position >= mItems.size()) return false;
         TimeInformation item = mItems.get(position);
         return itemsPendingRemoval.contains(item);
     }
