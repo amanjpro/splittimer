@@ -52,18 +52,15 @@ import android.widget.TextView;
 
 import org.greenrobot.eventbus.EventBus;
 import org.greenrobot.eventbus.Subscribe;
-import org.w3c.dom.Text;
 
 
 import me.amanj.splittimer.BuildConfig;
 import me.amanj.splittimer.R;
 import me.amanj.splittimer.util.IO;
 import me.amanj.splittimer.messages.Message;
-import me.amanj.splittimer.messages.Send;
 import me.amanj.splittimer.messages.MessageTag;
 import me.amanj.splittimer.util.Configurations;
 import me.amanj.splittimer.model.SplitTimerFragmentAdapter;
-import me.amanj.splittimer.util.TimeInformation;
 
 public class SplitTimerActivity extends AppCompatActivity {
 
@@ -220,7 +217,7 @@ public class SplitTimerActivity extends AppCompatActivity {
 
     @Subscribe
     public void onEvent(final Message event) {
-        if(event.tag() == MessageTag.REMOVE_LAST_FRAGMENT) {
+        if(event.tag() == MessageTag.REMOVE_DETAILED_PANE) {
 //            if(adapterViewPager.getCount() > DEFAULT_FRAGMENT_NUMBER)
 //                adapterViewPager.removeLastFragment();
         }

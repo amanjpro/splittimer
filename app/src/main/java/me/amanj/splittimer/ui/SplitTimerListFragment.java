@@ -344,7 +344,7 @@ public class SplitTimerListFragment extends Fragment {
             } else {
                 bus.post(new Send<Void>() {
                     public MessageTag tag() {
-                        return MessageTag.REMOVE_LAST_FRAGMENT;
+                        return MessageTag.REMOVE_DETAILED_PANE;
                     }
 
                     public Void receive() {
