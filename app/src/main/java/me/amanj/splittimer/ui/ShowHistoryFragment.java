@@ -156,14 +156,14 @@ public class ShowHistoryFragment extends Fragment {
 
     @Subscribe
     public void onEvent(Message event) {
-        if(event.tag() == MessageTag.OPEN) {
+        if (event.tag() == MessageTag.OPEN) {
             TimeInformation lastOpened = ((Send<TimeInformation>) event).receive();
 
-            if(showTimeInformationFragment == null)
+            if (showTimeInformationFragment == null)
                 showTimeInformationFragment = ShowTimeInformationFragment.newInstance();
 
             FragmentTransaction transaction = mFragmentManager.beginTransaction();
-            if(!inTwoPanesMode()) {
+            if (!inTwoPanesMode()) {
                 transaction.replace(R.id.fragment_container,
                         showTimeInformationFragment, ShowTimeInformationFragment.TAG);
             } else if (!showTimeInformationFragment.isAdded()) {
@@ -175,29 +175,31 @@ public class ShowHistoryFragment extends Fragment {
             transaction.commit();
             mFragmentManager.executePendingTransactions();
             openTimeInformation(lastOpened);
+        } else if (event.tag() == MessageTag.REMOVE_DETAILED_PANE) {
+            if(inTwoPanesMode()) {
+                mItemsFrameLayout.setLayoutParams(new LinearLayout.LayoutParams(
+                        MATCH_PARENT, MATCH_PARENT));
+                mDetailFrameLayout.setLayoutParams(new LinearLayout.LayoutParams(0,
+                        MATCH_PARENT));
+            }
         }
     }
 
 
     private void setLayout() {
-
         if (!showTimeInformationFragment.isAdded()) {
-
             mItemsFrameLayout.setLayoutParams(new LinearLayout.LayoutParams(
                     MATCH_PARENT, MATCH_PARENT));
             mDetailFrameLayout.setLayoutParams(new LinearLayout.LayoutParams(0,
                     MATCH_PARENT));
         } else {
-
             mItemsFrameLayout.setLayoutParams(new LinearLayout.LayoutParams(0,
                     MATCH_PARENT, 1f));
-
             mDetailFrameLayout.setLayoutParams(new LinearLayout.LayoutParams(0,
                     MATCH_PARENT, 2f));
         }
 
     }
-
 
     public void openTimeInformation(final TimeInformation tinfo) {
         bus.post(new Send<TimeInformation>() {

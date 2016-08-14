@@ -215,15 +215,6 @@ public class SplitTimerActivity extends AppCompatActivity {
         }
     }
 
-    @Subscribe
-    public void onEvent(final Message event) {
-        if(event.tag() == MessageTag.REMOVE_DETAILED_PANE) {
-//            if(adapterViewPager.getCount() > DEFAULT_FRAGMENT_NUMBER)
-//                adapterViewPager.removeLastFragment();
-        }
-    }
-
-
     private ActionBarDrawerToggle setupDrawerToggle() {
         return new ActionBarDrawerToggle(this, mDrawer, toolbar,
                 R.string.drawer_open,  R.string.drawer_close);
@@ -266,13 +257,11 @@ public class SplitTimerActivity extends AppCompatActivity {
     @Override
     public void onResume() {
         super.onResume();
-        bus.register(this);
         IO.loadConfigurations(lapOnStopSwitch, screenOrientationSwitch, this);
     }
 
     @Override
     public void onPause() {
-        bus.unregister(this);
         super.onPause();
         IO.saveToFile(this, Configurations.CONFIGURATIONS_FILE_NAME, Configurations.dumpConfigurations());
     }
