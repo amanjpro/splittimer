@@ -69,7 +69,7 @@ public class SplitTimerListFragment extends Fragment {
     private SplitTimerListAdapter mAdapter;
     private boolean laterStart = false;
     private RecyclerView recyclerView;
-    private final static String TAG = SplitTimerListFragment.class.getCanonicalName();
+    final static String TAG = SplitTimerListFragment.class.getCanonicalName();
 
     // newInstance constructor for creating fragment with arguments
     public static SplitTimerListFragment newInstance() {

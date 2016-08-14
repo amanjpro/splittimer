@@ -50,7 +50,7 @@ import me.amanj.splittimer.R;
 
 public class SaveDialog extends DialogFragment {
 
-    private final static String TAG = SaveDialog.class.getCanonicalName();
+    public final static String TAG = SaveDialog.class.getCanonicalName();
 
     private ResultReceiver resultReceiver;
 

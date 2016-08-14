@@ -50,7 +50,7 @@ import me.amanj.splittimer.util.Timestamp;
 
 public class PrecisionSettingDialog extends DialogFragment {
 
-    private final static String TAG = PrecisionSettingDialog.class.getCanonicalName();
+    final static String TAG = PrecisionSettingDialog.class.getCanonicalName();
     private RadioButton fine, less_fine, gross, more_gross;
     EventBus bus = EventBus.getDefault();
 

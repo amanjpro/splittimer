@@ -213,7 +213,7 @@ public class TimerFragment extends Fragment {
                 };
                 SaveDialog newFragment = SaveDialog.newInstance(res);
                 newFragment.show(getActivity().getSupportFragmentManager(),
-                        Configurations.SAVE_DIALOG_TAG);
+                        SaveDialog.TAG);
             }
         });
 

@@ -50,7 +50,7 @@ import me.amanj.splittimer.util.Timestamp;
 
 public class ClearHistoryConfirmationDialog extends DialogFragment {
 
-    private final static String TAG = ClearHistoryConfirmationDialog.class.getCanonicalName();
+    final static String TAG = ClearHistoryConfirmationDialog.class.getCanonicalName();
     EventBus bus = EventBus.getDefault();
 
     @Override

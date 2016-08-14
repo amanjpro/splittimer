@@ -192,14 +192,14 @@ public class SplitTimerActivity extends AppCompatActivity {
                 PrecisionSettingDialog precisionSettingDialog = new PrecisionSettingDialog();
                 mDrawer.closeDrawers();
                 precisionSettingDialog.show(getSupportFragmentManager(),
-                        Configurations.PRECISION_DIALOG_TAG);
+                        PrecisionSettingDialog.TAG);
                 break;
             case R.id.nav_clear_history:
                 ClearHistoryConfirmationDialog clearHistoryDialog =
                         new ClearHistoryConfirmationDialog();
                 mDrawer.closeDrawers();
                 clearHistoryDialog.show(getSupportFragmentManager(),
-                        Configurations.CLEAR_HISTORY_CONFIRMATION_TAG);
+                        ClearHistoryConfirmationDialog.TAG);
                 break;
             case R.id.nav_fork_me:
                 Intent github =

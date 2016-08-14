@@ -373,7 +373,7 @@ public class SplitTimerListAdapter extends RecyclerView.Adapter<SplitTimerListAd
                     });
                     newDialog.getDialog();
                     newDialog.show(((AppCompatActivity) outer.mContext).getSupportFragmentManager(),
-                            Configurations.SAVE_DIALOG_TAG);
+                            SaveDialog.TAG);
                     return true;
                 default:
                     return false;
