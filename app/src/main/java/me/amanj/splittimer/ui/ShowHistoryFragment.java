@@ -133,7 +133,10 @@ public class ShowHistoryFragment extends Fragment {
                 });
         }
 
-        if(savedInstanceState != null) return rootView;
+        if(savedInstanceState != null) {
+            setLayout();
+            return rootView;
+        }
 
         if(!inTwoPanesMode) {
             FragmentTransaction transaction = mFragmentManager.beginTransaction();
