@@ -72,6 +72,13 @@ public class TimerFragment extends Fragment {
     private final static String TAG = TimerFragment.class.getCanonicalName();
     private static int HALF_OPAQUE = 120;
     private static int FULL_OPAQUE = 255;
+    private TimeRunner runner;
+    private InteractiveTimestampsAdapter timestampsAdapter;
+    private TextView currentTimeView, totalTimeDisplay;
+    private boolean isRunning;
+    private Timestamp tstamp;
+    private RecyclerView listView;
+    private ImageButton saveButton, lapButton, actionButton;
 
     // newInstance constructor for creating fragment with arguments
     public static TimerFragment newInstance() {
@@ -81,18 +88,21 @@ public class TimerFragment extends Fragment {
         return fragmentFirst;
     }
 
-    private TimeRunner runner;
-    private InteractiveTimestampsAdapter timestampsAdapter;
-    private TextView currentTimeView, totalTimeDisplay;
-    private boolean isRunning;
-    private Timestamp tstamp;
-    private RecyclerView listView;
-    private ImageButton saveButton, lapButton, actionButton;
+    @Override
+    public void onResume() {
+        super.onResume();
+        bus.register(this);
+    }
+
+    @Override
+    public void onPause() {
+        bus.unregister(this);
+        super.onPause();
+    }
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        bus.register(this);
         getActivity().getWindow().addFlags(WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON);
     }
 

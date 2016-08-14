@@ -105,7 +105,6 @@ public class SplitTimerActivity extends AppCompatActivity {
         vpPager = (ViewPager) findViewById(R.id.vpPager);
         adapterViewPager = new SplitTimerFragmentAdapter(getSupportFragmentManager(),
                 getApplicationContext(), DEFAULT_FRAGMENT_NUMBER);
-        bus.register(this);
         vpPager.setAdapter(adapterViewPager);
 
         toolbar = (Toolbar) findViewById(R.id.toolbar);
@@ -270,11 +269,13 @@ public class SplitTimerActivity extends AppCompatActivity {
     @Override
     public void onResume() {
         super.onResume();
+        bus.register(this);
         IO.loadConfigurations(lapOnStopSwitch, screenOrientationSwitch, this);
     }
 
     @Override
     public void onPause() {
+        bus.unregister(this);
         super.onPause();
         IO.saveToFile(this, Configurations.CONFIGURATIONS_FILE_NAME, Configurations.dumpConfigurations());
     }

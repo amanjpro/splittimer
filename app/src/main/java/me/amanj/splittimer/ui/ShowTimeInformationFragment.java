@@ -74,12 +74,22 @@ public class ShowTimeInformationFragment extends Fragment {
         return fragmentFirst;
     }
 
+    @Override
+    public void onResume() {
+        super.onResume();
+        bus.register(this);
+    }
+
+    @Override
+    public void onPause() {
+        bus.unregister(this);
+        super.onPause();
+    }
 
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        bus.register(this);
     }
 
 

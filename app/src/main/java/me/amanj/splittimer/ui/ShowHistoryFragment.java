@@ -67,11 +67,16 @@ public class ShowHistoryFragment extends Fragment {
 
 
     @Override
-    public void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
+    public void onResume() {
+        super.onResume();
         bus.register(this);
     }
 
+    @Override
+    public void onPause() {
+        bus.unregister(this);
+        super.onPause();
+    }
 
     public static ShowHistoryFragment newInstance() {
         ShowHistoryFragment fragment = new ShowHistoryFragment();

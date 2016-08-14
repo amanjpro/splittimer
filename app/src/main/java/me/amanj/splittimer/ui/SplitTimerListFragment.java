@@ -82,7 +82,6 @@ public class SplitTimerListFragment extends Fragment {
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        bus.register(this);
         setRetainInstance(true);
     }
 
@@ -360,6 +359,7 @@ public class SplitTimerListFragment extends Fragment {
     @Override
     public void onResume() {
         super.onResume();
+        bus.register(this);
         if(!laterStart) {
             Log.i(TAG, "Loading entries command is being executed:  " + mAdapter.getItemCount());
             mAdapter.addAll(IO.loadEntries(getContext()));
@@ -369,6 +369,7 @@ public class SplitTimerListFragment extends Fragment {
 
     @Override
     public void onPause() {
+        bus.unregister(this);
         super.onPause();
         IO.saveToFile(getContext(), Configurations.ENTRIES_FILE_NAME, mAdapter.dump());
     }
