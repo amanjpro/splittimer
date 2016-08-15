@@ -68,5 +68,10 @@
     <string name="single_item_title">%1$s at %2$s</string>
     <string name="version_number">Version %s</string>
     <string name="button_undo">Undo</string>
+    <string name="average_lap">Average speed: %s</string>
+    <string name="fastest_lap">Fastest speed: %s </string>
+    <string name="slowest_lap">Slowest speed: %s </string>
+    <string name="statistics_dialog">Statistics</string>
+    <string name="show_statistics_menu">Show statics</string>
     <string name="clear_history_confirmation_message">Do you really want to clear history?</string>
 </resources>

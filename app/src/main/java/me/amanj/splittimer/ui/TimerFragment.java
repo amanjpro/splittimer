@@ -37,9 +37,9 @@ import android.os.Bundle;
 import android.support.v4.os.ResultReceiver;
 import android.support.v4.view.ViewCompat;
 import android.support.v7.widget.LinearLayoutManager;
+import android.support.v7.widget.PopupMenu;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
-import android.view.KeyEvent;
 import android.view.LayoutInflater;
 import android.view.MenuItem;
 import android.view.View;
@@ -47,6 +47,7 @@ import android.view.ViewGroup;
 import android.view.WindowManager;
 import android.widget.AdapterView;
 import android.widget.ImageButton;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 
@@ -220,6 +221,35 @@ public class TimerFragment extends Fragment {
                 SaveDialog newFragment = SaveDialog.newInstance(res);
                 newFragment.show(getActivity().getSupportFragmentManager(),
                         SaveDialog.TAG);
+            }
+        });
+
+
+        ImageView overflowView = (ImageView) view.findViewById(R.id.overflow_show_statistics);
+        overflowView.setVisibility(View.VISIBLE);
+        overflowView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                PopupMenu popup = new PopupMenu(view.getContext(), view);
+                popup.inflate(R.menu.time_fragment_list_menu);
+                popup.setOnMenuItemClickListener(new PopupMenu.OnMenuItemClickListener() {
+                    @Override
+                    public boolean onMenuItemClick(MenuItem item) {
+                        switch (item.getItemId()) {
+                            case R.id.show_statics_menu_item:
+                                ShowStatisticsDialog newFragment = ShowStatisticsDialog.newInstance(
+                                        timestampsAdapter.getFastestLap(),
+                                        timestampsAdapter.getSlowestLap(),
+                                        timestampsAdapter.getAverageLap());
+                                newFragment.show(getActivity().getSupportFragmentManager(),
+                                    ShowStatisticsDialog.TAG);
+                                return true;
+                            default:
+                                return false;
+                        }
+                    }
+                });
+                popup.show();
             }
         });
 

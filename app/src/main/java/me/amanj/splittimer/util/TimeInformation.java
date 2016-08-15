@@ -41,7 +41,6 @@ import java.util.List;
 public class TimeInformation implements Cloneable, Serializable {
     private List<Long> laps;
     private String name;
-    private long min = Long.MAX_VALUE, max = Long.MIN_VALUE;
     private long storingTime;
 
     public TimeInformation() {
@@ -57,15 +56,23 @@ public class TimeInformation implements Cloneable, Serializable {
 
 
     public long getAverageTime() {
-        return getElapsedTime() / laps.size();
+        return laps.size() <= 0? 0 : getElapsedTime() / laps.size();
     }
 
-    public long getMin() { return min; }
-    public long getMax() { return max; }
+    public long getFastest() {
+        if(laps.size() == 0) return 0l;
+        long max = Long.MIN_VALUE;
+        for(Long lap: laps) if(max < lap) max = lap;
+        return max;
+    }
+    public long getSlowest() {
+        if(laps.size() == 0) return 0l;
+        long min = Long.MAX_VALUE;
+        for(Long lap: laps) if(min > lap) min = lap;
+        return min;
+    }
 
     public void addLap(long time) {
-        if(min > time) min = time;
-        if(max < time) max = time;
         laps.add(time);
     }
 

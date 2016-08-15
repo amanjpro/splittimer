@@ -69,6 +69,9 @@ public class StaticTimestampsAdapter extends RecyclerView.Adapter<StaticTimestam
         notifyDataSetChanged();
     }
 
+    public long getFastestLap() { return mItems.getSlowest(); }
+    public long getSlowestLap() { return mItems.getFastest(); }
+    public long getAverageLap() { return mItems.getAverageTime(); }
 
     public long getStoringTime() { return mItems.getStoringTime(); }
     public String getName() { return mItems.getName(); }
