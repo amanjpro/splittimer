@@ -24,6 +24,17 @@ Icons are provided by: http://icons8.com
 
 # History
 
+## Version 3.0:
+
+- A whole new UI
+- Applying "Material Design" on the UI
+- Add an optimized layout for Tablets
+- Add a confirmation step for clearing history
+- Support Android 2.2 and up
+- Add Italian language
+- Cleanup the code
+- Bug fixes
+
 ## Version 2.0:
 
 - Rebrand the app to Lap Timer
