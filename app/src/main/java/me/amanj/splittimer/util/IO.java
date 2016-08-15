@@ -55,9 +55,7 @@ import me.amanj.splittimer.R;
 public class IO {
 
     private final static String TAG = IO.class.getCanonicalName();
-    public static void loadConfigurations(SwitchCompat lapOnStopSwtich,
-                                          SwitchCompat screenOrientationSwitch,
-                                          Context context) {
+    public static void loadConfigurations(Context context) {
         BufferedReader reader = null;
         Log.i(TAG, "Loading configurations");
         try {
@@ -73,13 +71,16 @@ public class IO {
 
             if (null != (line = reader.readLine())) {
                 Configurations.setLapOnStop(Boolean.parseBoolean(line));
-                lapOnStopSwtich.setChecked(Configurations.shouldLapOnStop());
                 Log.i(TAG, "Should lap on stop is loaded as: " + line);
             }
             if (null != (line = reader.readLine())) {
-                Configurations.shouldActivateScreenRotation(Boolean.parseBoolean(line));
-                screenOrientationSwitch.setChecked(Configurations.isScreenRotationActivated());
+                Configurations.activateScreenRotation(Boolean.parseBoolean(line));
                 Log.i(TAG, "Should screen be fixed is loaded as: " + line);
+            }
+
+            if (null != (line = reader.readLine())) {
+                Configurations.activateVolumeKeyControler(Boolean.parseBoolean(line));
+                Log.i(TAG, "Volume key controller is loaded as: " + line);
             }
 
         } catch (ParseException e) {

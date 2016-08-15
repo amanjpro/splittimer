@@ -46,6 +46,13 @@
                 android:icon="@drawable/ic_action_screen_rotation_nav"
                 android:id="@+id/nav_screen_orientation_switch"
                 android:title="@string/navbar_screen_orientation_switch" />
+
+            <item
+                app:actionLayout="@layout/nav_screen_orientation_switch"
+                android:icon="@drawable/ic_action_screen_rotation_nav"
+                android:id="@+id/nav_volume_key_switch"
+                android:title="@string/navbar_volume_key_switch" />
+
             <item android:id="@+id/nav_clear_history"
                 android:icon="@drawable/ic_action_name_clear_history_nav"
                 android:title="@string/clear_history_label" />

@@ -56,16 +56,18 @@ public class Configurations {
 
     private static boolean LAP_ON_STOP = true;
     private static boolean SCREEN_ORIENTATION_ACTIVATED = false;
+    private static boolean VOLUME_KEY_CONTROLLER_ACTIVATED = false;
 
     public static boolean shouldLapOnStop() { return LAP_ON_STOP; }
     public static void setLapOnStop(boolean option) { LAP_ON_STOP = option;}
 
     public static boolean isScreenRotationActivated() { return SCREEN_ORIENTATION_ACTIVATED; }
-    public static void shouldActivateScreenRotation(boolean option) { SCREEN_ORIENTATION_ACTIVATED = option;}
+    public static void activateScreenRotation(boolean option) { SCREEN_ORIENTATION_ACTIVATED = option;}
+
+    public static boolean isVolumeKeyControlerActivated() { return VOLUME_KEY_CONTROLLER_ACTIVATED; }
+    public static void activateVolumeKeyControler(boolean option) { VOLUME_KEY_CONTROLLER_ACTIVATED = option; }
 
     public static final String APP_FORK_URL = "http://www.github.com/amanjpro/splittimer";
-
-
     public static final String CONFIGURATIONS_FILE_NAME = "config";
     public static final String ENTRIES_FILE_NAME = "data";
 
@@ -77,6 +79,8 @@ public class Configurations {
         builder.append(LAP_ON_STOP);
         builder.append("\n");
         builder.append(SCREEN_ORIENTATION_ACTIVATED);
+        builder.append("\n");
+        builder.append(VOLUME_KEY_CONTROLLER_ACTIVATED);
         return builder.toString();
     }
 }

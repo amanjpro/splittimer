@@ -52,14 +52,12 @@ import android.widget.CompoundButton;
 import android.widget.TextView;
 
 import org.greenrobot.eventbus.EventBus;
-import org.greenrobot.eventbus.Subscribe;
 
 
 import me.amanj.splittimer.BuildConfig;
 import me.amanj.splittimer.R;
 import me.amanj.splittimer.messages.Send;
 import me.amanj.splittimer.util.IO;
-import me.amanj.splittimer.messages.Message;
 import me.amanj.splittimer.messages.MessageTag;
 import me.amanj.splittimer.util.Configurations;
 import me.amanj.splittimer.model.SplitTimerFragmentAdapter;
@@ -75,7 +73,7 @@ public class SplitTimerActivity extends AppCompatActivity {
     private NavigationView nvDrawer;
     private ActionBarDrawerToggle drawerToggle;
     private ViewPager vpPager;
-    private SwitchCompat lapOnStopSwitch, screenOrientationSwitch;
+    private SwitchCompat lapOnStopSwitch, screenOrientationSwitch, volumeKeySwitch;
     private final static String TAG = SplitTimerActivity.class.getCanonicalName();
 
     @Override
@@ -155,7 +153,7 @@ public class SplitTimerActivity extends AppCompatActivity {
             @Override
             public void onCheckedChanged(CompoundButton buttonView,
                                          boolean isChecked) {
-                Configurations.shouldActivateScreenRotation(isChecked);
+                Configurations.activateScreenRotation(isChecked);
                 setScreenOrientationSensor();
                 Log.i(TAG, "ScreenOrientation configuration set to: " + isChecked);
             }
@@ -164,6 +162,17 @@ public class SplitTimerActivity extends AppCompatActivity {
         setScreenOrientationSensor();
 
 
+        final MenuItem item3 = nvDrawer.getMenu().findItem(R.id.nav_volume_key_switch);
+        volumeKeySwitch = (SwitchCompat) MenuItemCompat.getActionView(item3);
+        volumeKeySwitch.setChecked(Configurations.isVolumeKeyControlerActivated());
+        volumeKeySwitch.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(CompoundButton buttonView,
+                                         boolean isChecked) {
+                Configurations.activateVolumeKeyControler(isChecked);
+            }
+        });
+        MenuItemCompat.setActionView(item3, volumeKeySwitch);
     }
 
     private void setScreenOrientationSensor() {
@@ -259,31 +268,37 @@ public class SplitTimerActivity extends AppCompatActivity {
     @Override
     public void onResume() {
         super.onResume();
-        IO.loadConfigurations(lapOnStopSwitch, screenOrientationSwitch, this);
+        IO.loadConfigurations(this);
+        screenOrientationSwitch.setChecked(Configurations.isScreenRotationActivated());
+        volumeKeySwitch.setChecked(Configurations.isVolumeKeyControlerActivated());
+        lapOnStopSwitch.setChecked(Configurations.shouldLapOnStop());
     }
 
     @Override
     public boolean dispatchKeyEvent(KeyEvent event) {
-        int keyCode = event.getKeyCode();
-        switch (keyCode) {
-            case KeyEvent.KEYCODE_VOLUME_UP:
-            case KeyEvent.KEYCODE_VOLUME_DOWN:
-                if(event.getAction() == KeyEvent.ACTION_UP) {
-                    Log.d(TAG, "Volume key down");
-                    bus.post(new Send<Void>() {
-                        public MessageTag tag() {
-                            return MessageTag.LAP;
-                        }
+        if(Configurations.isVolumeKeyControlerActivated()) {
+            int keyCode = event.getKeyCode();
+            switch (keyCode) {
+                case KeyEvent.KEYCODE_VOLUME_UP:
+                case KeyEvent.KEYCODE_VOLUME_DOWN:
+                    if (event.getAction() == KeyEvent.ACTION_UP) {
+                        Log.d(TAG, "Volume key down");
+                        bus.post(new Send<Void>() {
+                            public MessageTag tag() {
+                                return MessageTag.LAP;
+                            }
 
-                        public Void receive() {
-                            return null;
-                        }
-                    });
-                }
-                return true;
-            default:
-                return super.dispatchKeyEvent(event);
+                            public Void receive() {
+                                return null;
+                            }
+                        });
+                    }
+                    return true;
+                default:
+                    return super.dispatchKeyEvent(event);
+            }
         }
+        return super.dispatchKeyEvent(event);
     }
 
     @Override

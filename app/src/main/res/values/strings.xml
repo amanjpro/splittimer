@@ -51,6 +51,7 @@
     <string name="navbar_settings">Settings</string>
     <string name="navbar_lap_on_stop">Lap on stop</string>
     <string name="navbar_screen_orientation_switch">Allow rotation</string>
+    <string name="navbar_volume_key_switch">Allow volume keys</string>
     <string name="navbar_about_app">About</string>
     <string name="fine_precision">1/1000 seconds</string>
     <string name="less_fine_precision">1/100 seconds</string>
