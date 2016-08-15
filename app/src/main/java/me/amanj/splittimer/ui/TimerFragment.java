@@ -36,10 +36,10 @@ import android.support.v4.app.Fragment;
 import android.os.Bundle;
 import android.support.v4.os.ResultReceiver;
 import android.support.v4.view.ViewCompat;
-import android.support.v4.widget.CompoundButtonCompat;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
+import android.view.KeyEvent;
 import android.view.LayoutInflater;
 import android.view.MenuItem;
 import android.view.View;
@@ -105,6 +105,7 @@ public class TimerFragment extends Fragment {
         super.onCreate(savedInstanceState);
         getActivity().getWindow().addFlags(WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON);
     }
+
 
 
     @Override
@@ -187,17 +188,12 @@ public class TimerFragment extends Fragment {
         lapButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                timestampsAdapter.add(tstamp.lap());
-                if(!isRunning) {
-                    totalTimeDisplay.setText(
-                            Timestamp.timeStampToString(tstamp.getElapsedTime()));
-                    lapButton.getBackground().setAlpha(HALF_OPAQUE);
-                    ViewCompat.setActivated(lapButton, false);
-                    lapButton.setEnabled(false);
-                    lapButton.setClickable(false);
-                }
+                lap();
             }
         });
+
+
+
 
         saveButton.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -230,6 +226,7 @@ public class TimerFragment extends Fragment {
 
         return view;
     }
+
 
     // Process clicks on Context Menu Items
     @Override
@@ -264,6 +261,8 @@ public class TimerFragment extends Fragment {
                             Timestamp.timeStampToString(currentTime));
             totalTimeDisplay.setText(
                     Timestamp.timeStampToString(elapsedTime));
+        } else if(event.tag() == MessageTag.LAP && lapButton.isEnabled()) {
+            lap();
         }
     }
 
@@ -324,6 +323,19 @@ public class TimerFragment extends Fragment {
                 actionButton.setBackgroundResource(R.drawable.ic_action_play);
                 totalTimeDisplay.setText(savedInstanceState.getCharSequence("totalDisplay"));
             }
+        }
+    }
+
+
+    private void lap() {
+        timestampsAdapter.add(tstamp.lap());
+        if(!isRunning) {
+            totalTimeDisplay.setText(
+                    Timestamp.timeStampToString(tstamp.getElapsedTime()));
+            lapButton.getBackground().setAlpha(HALF_OPAQUE);
+            ViewCompat.setActivated(lapButton, false);
+            lapButton.setEnabled(false);
+            lapButton.setClickable(false);
         }
     }
 

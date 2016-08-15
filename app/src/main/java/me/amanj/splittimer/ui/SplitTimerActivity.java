@@ -46,6 +46,7 @@ import android.os.Bundle;
 import android.support.v7.widget.SwitchCompat;
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
+import android.view.KeyEvent;
 import android.view.MenuItem;
 import android.widget.CompoundButton;
 import android.widget.TextView;
@@ -56,6 +57,7 @@ import org.greenrobot.eventbus.Subscribe;
 
 import me.amanj.splittimer.BuildConfig;
 import me.amanj.splittimer.R;
+import me.amanj.splittimer.messages.Send;
 import me.amanj.splittimer.util.IO;
 import me.amanj.splittimer.messages.Message;
 import me.amanj.splittimer.messages.MessageTag;
@@ -258,6 +260,30 @@ public class SplitTimerActivity extends AppCompatActivity {
     public void onResume() {
         super.onResume();
         IO.loadConfigurations(lapOnStopSwitch, screenOrientationSwitch, this);
+    }
+
+    @Override
+    public boolean dispatchKeyEvent(KeyEvent event) {
+        int keyCode = event.getKeyCode();
+        switch (keyCode) {
+            case KeyEvent.KEYCODE_VOLUME_UP:
+            case KeyEvent.KEYCODE_VOLUME_DOWN:
+                if(event.getAction() == KeyEvent.ACTION_UP) {
+                    Log.d(TAG, "Volume key down");
+                    bus.post(new Send<Void>() {
+                        public MessageTag tag() {
+                            return MessageTag.LAP;
+                        }
+
+                        public Void receive() {
+                            return null;
+                        }
+                    });
+                }
+                return true;
+            default:
+                return super.dispatchKeyEvent(event);
+        }
     }
 
     @Override
