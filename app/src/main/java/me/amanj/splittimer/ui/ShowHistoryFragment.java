@@ -126,7 +126,7 @@ public class ShowHistoryFragment extends Fragment {
             mDetailFrameLayout = (FrameLayout) rootView.findViewById(R.id.detail_frag);
 
             // Add a OnBackStackChangedListener to reset the layout when the back stack changes
-            mFragmentManager.addOnBackStackChangedListener(
+            mFragmentManager.addOnBackStackChangedListener (
                 new FragmentManager.OnBackStackChangedListener() {
                     public void onBackStackChanged() {
                         setLayout();
@@ -190,10 +190,14 @@ public class ShowHistoryFragment extends Fragment {
             openTimeInformation(lastOpened);
         } else if (event.tag() == MessageTag.REMOVE_DETAILED_PANE) {
             if(inTwoPanesMode()) {
-                mItemsFrameLayout.setLayoutParams(new LinearLayout.LayoutParams(
-                        MATCH_PARENT, MATCH_PARENT));
-                mDetailFrameLayout.setLayoutParams(new LinearLayout.LayoutParams(0,
-                        MATCH_PARENT));
+                mFragmentManager.beginTransaction().remove(showTimeInformationFragment).commit();
+                mFragmentManager.executePendingTransactions();
+            }
+        } else if(event.tag() == MessageTag.MAYBE_OPEN) {
+            if(inTwoPanesMode() && showTimeInformationFragment.isAdded()) {
+                TimeInformation lastOpened = ((Send<TimeInformation>) event).receive();
+                if(lastOpened != null)
+                    openTimeInformation(lastOpened);
             }
         }
     }
@@ -201,17 +205,16 @@ public class ShowHistoryFragment extends Fragment {
 
     private void setLayout() {
         if (!showTimeInformationFragment.isAdded()) {
-            mItemsFrameLayout.setLayoutParams(new LinearLayout.LayoutParams(
-                    MATCH_PARENT, MATCH_PARENT));
             mDetailFrameLayout.setLayoutParams(new LinearLayout.LayoutParams(0,
                     MATCH_PARENT));
+            mItemsFrameLayout.setLayoutParams(new LinearLayout.LayoutParams(
+                    MATCH_PARENT, MATCH_PARENT));
         } else {
             mItemsFrameLayout.setLayoutParams(new LinearLayout.LayoutParams(0,
                     MATCH_PARENT, 1f));
             mDetailFrameLayout.setLayoutParams(new LinearLayout.LayoutParams(0,
                     MATCH_PARENT, 2f));
         }
-
     }
 
     public void openTimeInformation(final TimeInformation tinfo) {
