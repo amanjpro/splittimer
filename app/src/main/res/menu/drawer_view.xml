@@ -49,7 +49,7 @@
 
             <item
                 app:actionLayout="@layout/nav_screen_orientation_switch"
-                android:icon="@drawable/ic_action_screen_rotation_nav"
+                android:icon="@drawable/ic_action_volume_switch"
                 android:id="@+id/nav_volume_key_switch"
                 android:title="@string/navbar_volume_key_switch" />
 
