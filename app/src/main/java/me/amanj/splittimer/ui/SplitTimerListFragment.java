@@ -38,6 +38,7 @@ import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.content.ContextCompat;
+import android.support.v4.view.ViewCompat;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.helper.ItemTouchHelper;
@@ -256,10 +257,10 @@ public class SplitTimerListFragment extends Fragment {
                     int childCount = parent.getLayoutManager().getChildCount();
                     for (int i = 0; i < childCount; i++) {
                         View child = parent.getLayoutManager().getChildAt(i);
-                        if (child.getTranslationY() < 0) {
+                        if (ViewCompat.getTranslationY(child) < 0) {
                             // view is coming down
                             lastViewComingDown = child;
-                        } else if (child.getTranslationY() > 0) {
+                        } else if (ViewCompat.getTranslationY(child) > 0) {
                             // view is coming up
                             if (firstViewComingUp == null) {
                                 firstViewComingUp = child;
@@ -269,16 +270,16 @@ public class SplitTimerListFragment extends Fragment {
 
                     if (lastViewComingDown != null && firstViewComingUp != null) {
                         // views are coming down AND going up to fill the void
-                        top = lastViewComingDown.getBottom() + (int) lastViewComingDown.getTranslationY();
-                        bottom = firstViewComingUp.getTop() + (int) firstViewComingUp.getTranslationY();
+                        top = lastViewComingDown.getBottom() + (int) ViewCompat.getTranslationY(lastViewComingDown);
+                        bottom = firstViewComingUp.getTop() + (int) ViewCompat.getTranslationY(firstViewComingUp);
                     } else if (lastViewComingDown != null) {
                         // views are going down to fill the void
-                        top = lastViewComingDown.getBottom() + (int) lastViewComingDown.getTranslationY();
+                        top = lastViewComingDown.getBottom() + (int) ViewCompat.getTranslationY(lastViewComingDown);
                         bottom = lastViewComingDown.getBottom();
                     } else if (firstViewComingUp != null) {
                         // views are coming up to fill the void
                         top = firstViewComingUp.getTop();
-                        bottom = firstViewComingUp.getTop() + (int) firstViewComingUp.getTranslationY();
+                        bottom = firstViewComingUp.getTop() + (int) ViewCompat.getTranslationY(firstViewComingUp);
                     }
 
                     background.setBounds(left, top, right, bottom);
