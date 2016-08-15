@@ -54,7 +54,7 @@ public class CSVSupport {
         if(parts.length < 2) return null;
 
         String name = decsvify(parts[0]);
-        long storingTime = Long.parseLong(parts[2]);
+        long storingTime = Long.parseLong(parts[1]);
         TimeInformation tinfo = new TimeInformation(name, storingTime);
         for(int i = 2; i < parts.length; i++)
             tinfo.addLap(Long.parseLong(parts[i]));
