@@ -31,6 +31,8 @@
 package me.amanj.splittimer.util;
 
 
+import android.os.SystemClock;
+
 import java.io.Serializable;
 import java.text.SimpleDateFormat;
 import java.util.TimeZone;
@@ -52,14 +54,14 @@ public class Timestamp implements Serializable {
 
 
     public void start() {
-        startMillis = System.currentTimeMillis();
+        startMillis = SystemClock.elapsedRealtime();
         hasLapped = false;
         lastLap = 0;
         isRunning = true;
     }
 
     public long stop() {
-        stopMillis = System.currentTimeMillis();
+        stopMillis = SystemClock.elapsedRealtime();
         isRunning = false;
         long toReturn = !hasLapped?
             stopMillis - startMillis:
@@ -68,7 +70,7 @@ public class Timestamp implements Serializable {
     }
 
     public long getLapTime() {
-        long end = isRunning? System.currentTimeMillis() : stopMillis;
+        long end = isRunning? SystemClock.elapsedRealtime() : stopMillis;
         if(!hasLapped) {
             return end - startMillis;
         }
@@ -76,14 +78,14 @@ public class Timestamp implements Serializable {
     }
     public long getElapsedTime() {
         if(isRunning) {
-            return System.currentTimeMillis() - startMillis;
+            return SystemClock.elapsedRealtime() - startMillis;
         }
         return stopMillis - startMillis;
     }
 
     public long lap() {
         if(isRunning) {
-            return lap(System.currentTimeMillis());
+            return lap(SystemClock.elapsedRealtime());
         } else {
             return lap(stopMillis);
         }
