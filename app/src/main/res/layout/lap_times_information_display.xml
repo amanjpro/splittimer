@@ -51,6 +51,7 @@
         android:layout_height="wrap_content"
         android:textSize="@dimen/elapsed_time_display"
         android:layout_marginRight="10dp"
+        android:layout_marginEnd="10dp"
         android:layout_alignParentEnd="true"
         android:layout_alignParentRight="true"/>
 
@@ -86,10 +87,12 @@
 
         <!-- Just to adjust the layout -->
         <ImageView
-            android:layout_width="wrap_content"
+            android:layout_width="0dp"
             android:layout_alignParentRight="true"
             android:layout_alignParentEnd="true"
             android:layout_height="wrap_content"
+            android:layout_marginRight="5dp"
+            android:layout_marginEnd="5dp"
             android:visibility="invisible"
             android:src="@drawable/ic_action_overflow"
             android:id="@+id/overflow_show_statistics"
@@ -99,7 +102,10 @@
             android:id="@+id/list_caption_laps"
             android:text="@string/list_caption_laps"
             android:layout_toLeftOf="@id/overflow_show_statistics"
+            android:layout_toStartOf="@id/overflow_show_statistics"
             android:layout_width="wrap_content"
+            android:layout_marginRight="5dp"
+            android:layout_marginEnd="5dp"
             android:textStyle="bold"
             android:layout_height="wrap_content"
             android:textSize="@dimen/list_caption" />

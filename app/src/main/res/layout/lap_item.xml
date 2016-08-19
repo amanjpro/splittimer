@@ -58,19 +58,24 @@
 
 
     <ImageView
-        android:layout_width="wrap_content"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:src="@drawable/ic_action_overflow"
         android:visibility="invisible"
+        android:layout_marginRight="5dp"
+        android:layout_marginEnd="5dp"
         android:layout_alignParentRight="true"
         android:layout_alignParentEnd="true"
         android:contentDescription="@string/overflow_caption"
         android:id="@+id/lap_item_overflow"/>
 
+
     <TextView
         android:id="@+id/lap_item_lap_data"
         android:layout_width="wrap_content"
+        android:gravity="start"
         android:layout_toLeftOf="@id/lap_item_overflow"
+        android:layout_toStartOf="@id/lap_item_overflow"
         android:textSize="@dimen/list_item_large"
         android:textIsSelectable="false"
         android:layout_height="wrap_content" />

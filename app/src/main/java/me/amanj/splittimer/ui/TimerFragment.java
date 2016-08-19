@@ -48,6 +48,7 @@ import android.view.WindowManager;
 import android.widget.AdapterView;
 import android.widget.ImageButton;
 import android.widget.ImageView;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 
@@ -252,6 +253,9 @@ public class TimerFragment extends Fragment {
                 popup.show();
             }
         });
+
+
+        overflowView.getLayoutParams().width = RelativeLayout.LayoutParams.WRAP_CONTENT;
 
 
         return view;

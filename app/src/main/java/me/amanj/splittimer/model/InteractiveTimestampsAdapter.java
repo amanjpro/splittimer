@@ -31,9 +31,12 @@
 package me.amanj.splittimer.model;
 
 import android.content.Context;
+import android.text.Layout;
 import android.view.ContextMenu;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.WindowManager;
+import android.widget.RelativeLayout;
 
 /**
  * Created by Amanj Sherwany on 8/6/16.
@@ -48,6 +51,7 @@ public class InteractiveTimestampsAdapter extends StaticTimestampsAdapter {
     public StaticTimestampsAdapter.ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         StaticTimestampsAdapter.ViewHolder viewHolder = super.onCreateViewHolder(parent, viewType);
         viewHolder.getOverflowIcon().setVisibility(View.VISIBLE);
+        viewHolder.getOverflowIcon().getLayoutParams().width = RelativeLayout.LayoutParams.WRAP_CONTENT;
         return viewHolder;
     }
 }
