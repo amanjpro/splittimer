@@ -61,7 +61,7 @@ import me.amanj.splittimer.util.Timestamp;
 
 public class ShowTimeInformationFragment extends Fragment {
     private static EventBus bus = EventBus.getDefault();
-    private TextView totalTimeDisplay, name, fastestLap, slowestLap, averageLap;
+    private TextView totalTimeDisplay, name;
     private RecyclerView recyclerView;
     private StaticTimestampsAdapter timestampsAdapter;
     final static String TAG = ShowTimeInformationFragment.class.getCanonicalName();
@@ -112,7 +112,6 @@ public class ShowTimeInformationFragment extends Fragment {
             name.setText(getTitle());
             totalTimeDisplay.setText(
                     Timestamp.timeStampToString(timestampsAdapter.getLastElapsedTime()));
-            setStatistics();
         }
     }
 
@@ -136,22 +135,10 @@ public class ShowTimeInformationFragment extends Fragment {
         recyclerView.setHasFixedSize(true);
 
 
-        fastestLap = (TextView) view.findViewById(R.id.show_fastest_lap_view);
-        slowestLap = (TextView) view.findViewById(R.id.show_slowest_lap_view);
-        averageLap = (TextView) view.findViewById(R.id.show_average_lap_view);
-        setStatistics();
         return view;
 
     }
 
-    private void setStatistics() {
-        fastestLap.setText(getResources().getString(R.string.fastest_lap,
-                Timestamp.timeStampToString(timestampsAdapter.getFastestLap())));
-        slowestLap.setText(getResources().getString(R.string.slowest_lap,
-                Timestamp.timeStampToString(timestampsAdapter.getSlowestLap())));
-        averageLap.setText(getResources().getString(R.string.average_lap,
-                Timestamp.timeStampToString(timestampsAdapter.getAverageLap())));
-    }
 
     public String getTitle() {
         if(timestampsAdapter == null) return "";
@@ -168,7 +155,6 @@ public class ShowTimeInformationFragment extends Fragment {
             totalTimeDisplay.setText(
                     Timestamp.timeStampToString(tinfo.getElapsedTime()));
             name.setText(getTitle());
-            setStatistics();
         } else if(event.tag() == MessageTag.RENAMED) {
             String tinfo = ((Send<String>) event).receive();
             timestampsAdapter.setName(tinfo);
