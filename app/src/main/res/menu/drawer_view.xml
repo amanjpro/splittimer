@@ -52,10 +52,6 @@
                 android:icon="@drawable/ic_action_volume_switch"
                 android:id="@+id/nav_volume_key_switch"
                 android:title="@string/navbar_volume_key_switch" />
-
-            <item android:id="@+id/nav_clear_history"
-                android:icon="@drawable/ic_action_name_clear_history_nav"
-                android:title="@string/clear_history_label" />
         </menu>
     </item>
 
