@@ -37,10 +37,11 @@ import android.os.Bundle;
 import android.support.v4.os.ResultReceiver;
 import android.support.v4.view.ViewCompat;
 import android.support.v7.widget.LinearLayoutManager;
-import android.support.v7.widget.PopupMenu;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 import android.view.LayoutInflater;
+import android.view.Menu;
+import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
@@ -227,40 +228,34 @@ public class TimerFragment extends Fragment {
 
 
         ImageView overflowView = (ImageView) view.findViewById(R.id.overflow_show_statistics);
-        overflowView.setVisibility(View.VISIBLE);
-        overflowView.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                PopupMenu popup = new PopupMenu(view.getContext(), view);
-                popup.inflate(R.menu.time_fragment_list_menu);
-                popup.setOnMenuItemClickListener(new PopupMenu.OnMenuItemClickListener() {
-                    @Override
-                    public boolean onMenuItemClick(MenuItem item) {
-                        switch (item.getItemId()) {
-                            case R.id.show_statics_menu_item:
-                                ShowStatisticsDialog newFragment = ShowStatisticsDialog.newInstance(
-                                        timestampsAdapter.getFastestLap(),
-                                        timestampsAdapter.getSlowestLap(),
-                                        timestampsAdapter.getAverageLap());
-                                newFragment.show(getActivity().getSupportFragmentManager(),
-                                    ShowStatisticsDialog.TAG);
-                                return true;
-                            default:
-                                return false;
-                        }
-                    }
-                });
-                popup.show();
-            }
-        });
-
-
         overflowView.getLayoutParams().width = RelativeLayout.LayoutParams.WRAP_CONTENT;
 
 
+        setHasOptionsMenu(true);
         return view;
     }
 
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        switch (item.getItemId()) {
+            case R.id.show_statics_menu_item:
+                ShowStatisticsDialog newFragment = ShowStatisticsDialog.newInstance(
+                        timestampsAdapter.getFastestLap(),
+                        timestampsAdapter.getSlowestLap(),
+                        timestampsAdapter.getAverageLap());
+                newFragment.show(getActivity().getSupportFragmentManager(),
+                    ShowStatisticsDialog.TAG);
+                return true;
+            default:
+                return false;
+        }
+    }
+
+    @Override
+    public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
+        inflater.inflate(R.menu.timer_fragment_menu, menu);
+        super.onCreateOptionsMenu(menu, inflater);
+    }
 
     // Process clicks on Context Menu Items
     @Override

@@ -34,6 +34,6 @@ package me.amanj.splittimer.messages;
  * Created by Amanj Sherwany on 8/7/16.
  */
 public enum MessageTag {
-    SHOW, SAVE, OPEN, UPDATE_DISPLAYS, CLEAR_HISTORY, RENAME,
+    SHOW, SAVE, OPEN, UPDATE_DISPLAYS, CLEAR_HISTORY, RENAME, SHOW_STATISTICS,
     DELETED, RENAMED, REMOVE_DETAILED_PANE, MAYBE_OPEN, SWIPED, LAP
 }

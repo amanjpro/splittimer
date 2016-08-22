@@ -159,6 +159,12 @@ public class ShowTimeInformationFragment extends Fragment {
             String tinfo = ((Send<String>) event).receive();
             timestampsAdapter.setName(tinfo);
             name.setText(getTitle());
-        }
+        } else if(event.tag() == MessageTag.SHOW_STATISTICS) {
+            ShowStatisticsDialog newFragment = ShowStatisticsDialog.newInstance(
+                    timestampsAdapter.getFastestLap(),
+                    timestampsAdapter.getSlowestLap(),
+                    timestampsAdapter.getAverageLap());
+            newFragment.show(getActivity().getSupportFragmentManager(),
+                    ShowStatisticsDialog.TAG);        }
     }
 }

@@ -37,6 +37,9 @@ import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
 import android.util.Log;
 import android.view.LayoutInflater;
+import android.view.Menu;
+import android.view.MenuInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.FrameLayout;
@@ -161,8 +164,35 @@ public class ShowHistoryFragment extends Fragment {
             fragmentTransaction.commit();
         }
 
+        setHasOptionsMenu(true);
+
 
         return rootView;
+
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        switch (item.getItemId()) {
+            case R.id.clear_history_menu_item:
+                ClearHistoryConfirmationDialog clearHistoryDialog =
+                        new ClearHistoryConfirmationDialog();
+                clearHistoryDialog.show(getActivity().getSupportFragmentManager(),
+                        ClearHistoryConfirmationDialog.TAG);
+                return true;
+            case R.id.show_statics_history_menu_item:
+                bus.post(new Message() {
+                    public MessageTag tag() { return MessageTag.SHOW_STATISTICS; }
+                });
+            default:
+                return false;
+        }
+    }
+
+    @Override
+    public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
+        inflater.inflate(R.menu.show_history_fragment_menu, menu);
+        super.onCreateOptionsMenu(menu, inflater);
     }
 
 

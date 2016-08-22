@@ -38,4 +38,11 @@
         android:icon="@drawable/ic_action_clear_history"
         android:orderInCategory="100"
         app:showAsAction="ifRoom|withText" />
+
+    <item
+        android:id="@+id/show_statics_history_menu_item"
+        android:title="@string/show_statistics_menu"
+        android:icon="@drawable/ic_action_statistics"
+        android:orderInCategory="100"
+        app:showAsAction="ifRoom|withText" />
 </menu>
