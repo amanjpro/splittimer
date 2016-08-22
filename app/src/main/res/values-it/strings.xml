@@ -70,9 +70,9 @@
     <string name="button_undo">Disfare</string>
     <string name="clear_history_confirmation_message">Sei sicuro che vuoi cancellare i tuoi dati?</string>
     <string name="single_item_title">%1$s al %2$s</string>
-    <string name="fastest_lap">Il più veloce: %s</string>
-    <string name="average_lap">Velocità media: %s</string>
-    <string name="slowest_lap">Il meno veloce: %s</string>
+    <string name="fastest_lap">Il più veloce:</string>
+    <string name="average_lap">Velocità media:</string>
+    <string name="slowest_lap">Il meno veloce:</string>
     <string name="statistics_dialog">Statistica</string>
     <string name="show_statistics_menu">Presenta i statistici</string>
     <string name="navbar_volume_key_switch">Permettere il Volumo</string>

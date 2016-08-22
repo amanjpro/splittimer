@@ -107,11 +107,8 @@ public class ShowStatisticsDialog extends DialogFragment {
     }
 
     private void setStatistics(long fastest, long slowest, long average) {
-        fastestLap.setText(getResources().getString(R.string.fastest_lap,
-                Timestamp.timeStampToString(fastest)));
-        slowestLap.setText(getResources().getString(R.string.slowest_lap,
-                Timestamp.timeStampToString(slowest)));
-        averageLap.setText(getResources().getString(R.string.average_lap,
-                Timestamp.timeStampToString(average)));
+        fastestLap.setText(Timestamp.timeStampToString(fastest));
+        slowestLap.setText(Timestamp.timeStampToString(slowest));
+        averageLap.setText(Timestamp.timeStampToString(average));
     }
 }
