@@ -36,8 +36,10 @@ import android.app.Dialog;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.os.Bundle;
+import android.support.design.widget.TextInputLayout;
 import android.support.v4.app.DialogFragment;
 import android.support.v4.os.ResultReceiver;
+import android.support.v4.view.ViewCompat;
 import android.support.v7.app.AlertDialog;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -131,9 +133,12 @@ public class SaveDialog extends DialogFragment {
                 }
             }
         );
+
+        final TextInputLayout textInputLayout = (TextInputLayout)
+                view.findViewById(R.id.input_layout_name);
         // only will trigger it if no physical keyboard is open
 //        mgr.toggleSoftInput(InputMethodManager.SHOW_FORCED, 0);
-        AlertDialog dialog =  builder.create();
+        final AlertDialog dialog =  builder.create();
         dialog.getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_STATE_ALWAYS_VISIBLE);
         dialog.setCanceledOnTouchOutside(false);
         dialog.setCancelable(false);
@@ -143,7 +148,7 @@ public class SaveDialog extends DialogFragment {
         dialog.getButton(AlertDialog.BUTTON_POSITIVE).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                String activityName = editView.getText().toString();
+                String activityName = editView.getText().toString().trim();
                 if(activityName.length() > 0) {
                     Bundle bundle = new Bundle();
                     bundle.putString("name", activityName);
@@ -151,9 +156,14 @@ public class SaveDialog extends DialogFragment {
                     SaveDialog.this.getDialog().dismiss();
 //                    mgr.toggleSoftInput(InputMethodManager.SHOW_FORCED, 0);
                 } else {
-                    Toast.makeText(getActivity().getApplicationContext(),
-                        R.string.error_message_no_name,
-                        Toast.LENGTH_LONG).show();
+                    textInputLayout.setError(getString(R.string.error_message_no_name));
+                    if (view.requestFocus()) {
+                        dialog.getWindow().setSoftInputMode(
+                                WindowManager.LayoutParams.SOFT_INPUT_STATE_ALWAYS_VISIBLE);
+                    }
+//                    Toast.makeText(getActivity().getApplicationContext(),
+//                        R.string.error_message_no_name,
+//                        Toast.LENGTH_LONG).show();
                 }
             }
         });
