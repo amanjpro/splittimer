@@ -64,6 +64,8 @@ public class ShowHistoryFragment extends Fragment {
     private SplitTimerListFragment splitTimerListFragment;
     private ShowTimeInformationFragment showTimeInformationFragment;
     private View rootView;
+    private Menu menu;
+    private MenuItem showStatistics, clearHistory;
     private FragmentManager mFragmentManager;
     private FrameLayout mItemsFrameLayout, mDetailFrameLayout;
     private static final int MATCH_PARENT = LinearLayout.LayoutParams.MATCH_PARENT;
@@ -132,6 +134,7 @@ public class ShowHistoryFragment extends Fragment {
             mFragmentManager.addOnBackStackChangedListener (
                 new FragmentManager.OnBackStackChangedListener() {
                     public void onBackStackChanged() {
+                        showStatistics.setVisible(showTimeInformationFragment.isAdded());
                         setLayout();
                     }
                 });
@@ -139,10 +142,15 @@ public class ShowHistoryFragment extends Fragment {
             mFragmentManager.addOnBackStackChangedListener(
                 new FragmentManager.OnBackStackChangedListener() {
                     public void onBackStackChanged() {
-                        splitTimerListFragment.unsetLastOpen();
+                        if(!splitTimerListFragment.isHidden()) {
+                            splitTimerListFragment.unsetLastOpen();
+                        }
+                        clearHistory.setVisible(!clearHistory.isVisible());
+                        showStatistics.setVisible(!showStatistics.isVisible());
                     }
                 });
         }
+
 
         if(savedInstanceState != null) {
             if(inTwoPanesMode) {
@@ -193,6 +201,12 @@ public class ShowHistoryFragment extends Fragment {
     public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
         inflater.inflate(R.menu.show_history_fragment_menu, menu);
         super.onCreateOptionsMenu(menu, inflater);
+        this.menu = menu;
+        showStatistics = menu.findItem(R.id.show_statics_history_menu_item);
+        clearHistory   = menu.findItem(R.id.clear_history_menu_item);
+        showStatistics.setVisible(showTimeInformationFragment.isAdded() ||
+                                    splitTimerListFragment.isHidden());
+        clearHistory.setVisible(!splitTimerListFragment.isHidden());
     }
 
 
