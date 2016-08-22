@@ -48,7 +48,7 @@ import me.amanj.splittimer.messages.Send;
 public class ClearHistoryConfirmationDialog extends DialogFragment {
 
     final static String TAG = ClearHistoryConfirmationDialog.class.getCanonicalName();
-    EventBus bus = EventBus.getDefault();
+    private static final EventBus bus = EventBus.getDefault();
 
     @Override
     public void onCreate(Bundle savedInstanceState) {

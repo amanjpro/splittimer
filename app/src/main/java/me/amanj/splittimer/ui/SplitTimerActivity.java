@@ -65,7 +65,7 @@ import me.amanj.splittimer.model.SplitTimerFragmentAdapter;
 public class SplitTimerActivity extends AppCompatActivity {
 
     private final int DEFAULT_FRAGMENT_NUMBER = 2;
-    EventBus bus = EventBus.getDefault();
+    private static final EventBus bus = EventBus.getDefault();
     private TabLayout tabLayout;
     private SplitTimerFragmentAdapter adapterViewPager;
     private DrawerLayout mDrawer;

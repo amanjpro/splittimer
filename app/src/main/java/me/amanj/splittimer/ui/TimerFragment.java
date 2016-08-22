@@ -71,7 +71,7 @@ import me.amanj.splittimer.model.InteractiveTimestampsAdapter;
 
 public class TimerFragment extends Fragment {
 
-    private static EventBus bus = EventBus.getDefault();
+    private static final EventBus bus = EventBus.getDefault();
     private final static String TAG = TimerFragment.class.getCanonicalName();
     private static int HALF_OPAQUE = 120;
     private static int FULL_OPAQUE = 255;

@@ -60,7 +60,7 @@ import me.amanj.splittimer.util.Timestamp;
  */
 
 public class ShowTimeInformationFragment extends Fragment {
-    private static EventBus bus = EventBus.getDefault();
+    private static final EventBus bus = EventBus.getDefault();
     private TextView totalTimeDisplay, name;
     private RecyclerView recyclerView;
     private StaticTimestampsAdapter timestampsAdapter;

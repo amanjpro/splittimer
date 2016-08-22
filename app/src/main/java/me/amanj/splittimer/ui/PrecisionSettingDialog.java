@@ -52,7 +52,7 @@ public class PrecisionSettingDialog extends DialogFragment {
 
     final static String TAG = PrecisionSettingDialog.class.getCanonicalName();
     private RadioButton fine, less_fine, gross, more_gross;
-    EventBus bus = EventBus.getDefault();
+    private static final EventBus bus = EventBus.getDefault();
 
     @Override
     public void onCreate(Bundle savedInstanceState) {

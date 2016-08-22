@@ -58,7 +58,7 @@ import me.amanj.splittimer.util.TimeInformation;
  * Created by Amanj Sherwany on 8/14/16.
  */
 public class ShowHistoryFragment extends Fragment {
-    EventBus bus = EventBus.getDefault();
+    private static final EventBus bus = EventBus.getDefault();
 
     private static final String TAG = ShowTimeInformationFragment.class.getCanonicalName();
     private SplitTimerListFragment splitTimerListFragment;

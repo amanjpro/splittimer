@@ -66,7 +66,7 @@ import me.amanj.splittimer.util.TimeInformation;
 
 public class SplitTimerListFragment extends Fragment {
 
-    EventBus bus = EventBus.getDefault();
+    private static final EventBus bus = EventBus.getDefault();
     private SplitTimerListAdapter mAdapter;
     private RecyclerView recyclerView;
     final static String TAG = SplitTimerListFragment.class.getCanonicalName();
