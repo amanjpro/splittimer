@@ -37,8 +37,8 @@
     <string name="precision_setting_title">Controllo di precesione</string>
     <string name="precision_label">Precesione</string>
     <string name="delete_entry">Cancellare</string>
-    <string name="clear_history_label">Cancelare la storia</string>
-    <string name="saved_list">Storia</string>
+    <string name="clear_history_label">Cancelare le attività</string>
+    <string name="saved_list">Attività salvate</string>
     <string name="drawer_close">Chiudere il cassetto di navigazione</string>
     <string name="drawer_open">Aprire il cassetto di navigazione</string>
     <string name="fine_precision">1/1000 secondi</string>
@@ -68,7 +68,7 @@
     <string name="bad_configuration_file">Configurazioni salvate non possono essere caricati</string>
     <string name="bad_entry_file">Gli attiviti salvate non possono essere caricati</string>
     <string name="button_undo">Disfare</string>
-    <string name="clear_history_confirmation_message">Sei sicuro che vuoi cancellare i tuoi dati?</string>
+    <string name="clear_history_confirmation_message">Sei sicuro che vuoi cancellare le tue attività?</string>
     <string name="single_item_title">%1$s al %2$s</string>
     <string name="fastest_lap">Il più veloce:</string>
     <string name="average_lap">Velocità media:</string>

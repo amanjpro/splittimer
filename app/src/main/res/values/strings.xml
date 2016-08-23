@@ -34,7 +34,7 @@
     <string name="save_name_label">Activity name</string>
     <string name="save_dialog_ok_text">Done</string>
     <string name="save_dialog_cancel_text">Cancel</string>
-    <string name="saved_list">History</string>
+    <string name="saved_list">Saved Activities</string>
     <string name="error_message_no_name">Please enter a name for this activity</string>
     <string name="merge_with_above">Merge with the above lap</string>
     <string name="merge_with_below">Merge with the below lap</string>
@@ -45,7 +45,7 @@
     <string name="drawer_open">Open navigation drawer</string>
     <string name="drawer_close">Close navigation drawer</string>
     <string name="precision_label">Precision</string>
-    <string name="clear_history_label">Clear history</string>
+    <string name="clear_history_label">Clear activites</string>
     <string name="rate_me_label">Rate me</string>
     <string name="fork_me_label">Developer page</string>
     <string name="navbar_settings">Settings</string>
@@ -74,5 +74,5 @@
     <string name="slowest_lap">Slowest speed:</string>
     <string name="statistics_dialog">Statistics</string>
     <string name="show_statistics_menu">Show statics</string>
-    <string name="clear_history_confirmation_message">Do you really want to clear history?</string>
+    <string name="clear_history_confirmation_message">Do you really want to clear your saved activities?</string>
 </resources>
