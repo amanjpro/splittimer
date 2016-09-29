@@ -323,6 +323,9 @@ public class SplitTimerListFragment extends Fragment {
     public void unsetLastOpen() {
         mAdapter.setLastOpened(-1);
     }
+    public void redrawAll() {
+        mAdapter.redrawAll();
+    }
 
 
     @Subscribe

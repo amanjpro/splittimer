@@ -253,6 +253,8 @@ public class ShowHistoryFragment extends Fragment {
                     MATCH_PARENT));
             mItemsFrameLayout.setLayoutParams(new LinearLayout.LayoutParams(
                     MATCH_PARENT, MATCH_PARENT));
+            splitTimerListFragment.unsetLastOpen();
+            splitTimerListFragment.redrawAll();
         } else {
             mItemsFrameLayout.setLayoutParams(new LinearLayout.LayoutParams(0,
                     MATCH_PARENT, 1f));

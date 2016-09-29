@@ -105,19 +105,22 @@ public class SplitTimerListAdapter extends RecyclerView.Adapter<SplitTimerListAd
 
     public void addAll(List<TimeInformation> mItems) {
         this.mItems.addAll(mItems);
-        notifyDataSetChanged();
+        redrawAll();
     }
 
     public void add(TimeInformation item) {
         mItems.add(item);
-        notifyDataSetChanged();
+        redrawAll();
     }
 
     public void clear() {
         mItems.clear();
-        notifyDataSetChanged();
+        redrawAll();
     }
 
+    public void redrawAll () {
+        notifyDataSetChanged();
+    }
 
     public void remove(int index) {
         TimeInformation item = mItems.get(index);
@@ -126,7 +129,7 @@ public class SplitTimerListAdapter extends RecyclerView.Adapter<SplitTimerListAd
         }
         if (mItems.contains(item)) {
             mItems.remove(index);
-            notifyDataSetChanged();
+            redrawAll();
         }
     }
 
@@ -255,7 +258,7 @@ public class SplitTimerListAdapter extends RecyclerView.Adapter<SplitTimerListAd
                             return tinfo;
                         }
                     });
-                    notifyDataSetChanged();
+                    redrawAll();
                 }
             });
         }
@@ -400,7 +403,7 @@ public class SplitTimerListAdapter extends RecyclerView.Adapter<SplitTimerListAd
             final String result = sent.second;
             Log.d(TAG, "ItemCount: " + getItemCount());
             ((TimeInformation)getItem(index)).setName(result);
-            notifyDataSetChanged();
+            redrawAll();
             //notifyItemChanged(position);
             if (lastOpened == index) {
                 bus.post(new Send<String>() {
