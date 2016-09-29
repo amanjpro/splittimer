@@ -30,7 +30,7 @@
 
 package me.amanj.splittimer.util;
 
-import android.os.AsyncTask;
+import android.os.Handler;
 import android.widget.TextView;
 
 /**
@@ -38,12 +38,17 @@ import android.widget.TextView;
  */
 
 
-public class TimeRunner extends AsyncTask<Timestamp, String, String> {
+public class TimeRunner extends Thread {
+    private Handler handler;
     private TextView lapDisplay, totalDisplay;
+    private Timestamp stamper;
+    private boolean isRunning = false;
 
-    public TimeRunner(TextView lapDisplay, TextView totalDisplay) {
+    public TimeRunner(TextView lapDisplay, TextView totalDisplay, Timestamp stamper) {
         this.totalDisplay = totalDisplay;
         this.lapDisplay = lapDisplay;
+        this.stamper = stamper;
+        this.handler = new Handler();
     }
 
 //    public void updateDisplays(TextView lapDisplay, TextView totalDisplay) {
@@ -51,23 +56,44 @@ public class TimeRunner extends AsyncTask<Timestamp, String, String> {
 //        this.totalDisplay = totalDisplay;
 //    }
 
+//    @Override
+//    protected String doInBackground(Timestamp... params) {
+//        while(true) {
+//            publishProgress(Timestamp.timeStampToString(params[0].getLapTime()),
+//                    Timestamp.timeStampToString(params[0].getElapsedTime()));
+//            if(isCancelled()) break;
+//            try {
+//                Thread.sleep(100);
+//            } catch(InterruptedException iex) {}
+//        }
+//        return Timestamp.timeStampToString(params[1].getElapsedTime());
+//    }
+//
+    private void updateProgress(String lap, String elapsed) {
+        lapDisplay.setText(lap);
+        totalDisplay.setText(elapsed);
+    }
+
+
+    public void stopTimer() { isRunning = false; }
+
     @Override
-    protected String doInBackground(Timestamp... params) {
-        while(true) {
-            publishProgress(Timestamp.timeStampToString(params[0].getLapTime()),
-                    Timestamp.timeStampToString(params[0].getElapsedTime()));
-            if(isCancelled()) break;
+    public void run() {
+        isRunning = true;
+        while (isRunning) {
+            handler.post(new Runnable() {
+                @Override
+                public void run() {
+                    updateProgress(Timestamp.timeStampToString(stamper.getLapTime()),
+                            Timestamp.timeStampToString(stamper.getElapsedTime()));
+                }
+            });
             try {
                 Thread.sleep(100);
             } catch(InterruptedException iex) {}
         }
-        return Timestamp.timeStampToString(params[1].getElapsedTime());
     }
 
-    @Override
-    public void onProgressUpdate(String... values) {
-        lapDisplay.setText(values[0]);
-        totalDisplay.setText(values[1]);
-    }
+
 }
 

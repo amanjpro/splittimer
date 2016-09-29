@@ -155,7 +155,7 @@ public class TimerFragment extends Fragment {
             public void onClick(View view) {
                 if(!isRunning) {
                     timestampsAdapter.clear();
-                    runner = new TimeRunner(currentTimeView, totalTimeDisplay);
+                    runner = new TimeRunner(currentTimeView, totalTimeDisplay, tstamp);
                     actionButton.setBackgroundResource(R.drawable.ic_action_stop);
                     saveButton.getBackground().setAlpha(HALF_OPAQUE);
                     lapButton.getBackground().setAlpha(FULL_OPAQUE);
@@ -163,12 +163,12 @@ public class TimerFragment extends Fragment {
                     lapButton.setEnabled(true);
                     lapButton.setClickable(true);
                     tstamp.start();
-                    runner.execute(tstamp);
+                    runner.start();
                 } else {
                     actionButton.setBackgroundResource(R.drawable.ic_action_play);
                     saveButton.getBackground().setAlpha(FULL_OPAQUE);
                     long lastLap = tstamp.stop();
-                    runner.cancel(true);
+                    runner.stopTimer();
                     if(Configurations.shouldLapOnStop()) {
                         lapButton.getBackground().setAlpha(HALF_OPAQUE);
                         timestampsAdapter.add(lastLap);
@@ -305,7 +305,7 @@ public class TimerFragment extends Fragment {
         outState.putSerializable("timestamps", timestampsAdapter.getAdapterContent());
         outState.putCharSequence("totalDisplay", totalTimeDisplay.getText());
         if(isRunning) {
-            runner.cancel(true);
+            runner.stopTimer();
             outState.putSerializable("timestamp", tstamp);
         }
     }
@@ -320,8 +320,8 @@ public class TimerFragment extends Fragment {
             isRunning = savedInstanceState.getBoolean("isRunning");
             if(isRunning) {
                 tstamp = (Timestamp) savedInstanceState.getSerializable("timestamp");
-                runner = new TimeRunner(currentTimeView, totalTimeDisplay);
-                runner.execute(tstamp);
+                runner = new TimeRunner(currentTimeView, totalTimeDisplay, tstamp);
+                runner.start();
             }
             timestampsAdapter.setTimeInformation(
                     (TimeInformation)savedInstanceState.getSerializable("timestamps"));
