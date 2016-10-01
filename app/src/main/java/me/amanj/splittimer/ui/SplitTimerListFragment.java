@@ -382,7 +382,7 @@ public class SplitTimerListFragment extends Fragment {
     public void onPause() {
         bus.unregister(this);
         super.onPause();
-        IO.saveToFile(getContext(), Configurations.ENTRIES_FILE_NAME, mAdapter.dump());
+        IO.saveEntriesToFile(getContext(), mAdapter.dump());
     }
 
 

@@ -297,7 +297,7 @@ public class SplitTimerActivity extends AppCompatActivity {
     @Override
     public void onPause() {
         super.onPause();
-        IO.saveToFile(this, Configurations.CONFIGURATIONS_FILE_NAME, Configurations.dumpConfigurations());
+        IO.saveConfigurations(this);
     }
 
 

@@ -30,6 +30,9 @@
 
 package me.amanj.splittimer.util;
 
+import java.util.HashMap;
+import java.util.Map;
+
 /**
  * Created by Amanj Sherwany on 8/6/16.
  */
@@ -72,15 +75,18 @@ public class Configurations {
     public static final String ENTRIES_FILE_NAME = "data";
 
 
-    public static String dumpConfigurations() {
-        StringBuilder builder = new StringBuilder();
-        builder.append(CURRENT_FORMAT);
-        builder.append("\n");
-        builder.append(LAP_ON_STOP);
-        builder.append("\n");
-        builder.append(SCREEN_ORIENTATION_ACTIVATED);
-        builder.append("\n");
-        builder.append(VOLUME_KEY_CONTROLLER_ACTIVATED);
-        return builder.toString();
+
+    public static String CURRENT_FORMAT_CONFIG_NAME = "current_format";
+    public static String LAP_ON_STOP_CONFIG_NAME = "lap_on_stop";
+    public static String SCREEN_ORIENTATION_ACTIVATED_CONFIG_NAME = "screen_orientation_activated";
+    public static String VOLUME_KEY_CONTROLLER_ACTIVATED_CONFIG_NAME = "volume_key_controller_activated";
+
+    public static Map<String, String> dumpConfigurations() {
+        Map<String, String> configurations = new HashMap<>();
+        configurations.put(CURRENT_FORMAT_CONFIG_NAME, "" + CURRENT_FORMAT);
+        configurations.put(LAP_ON_STOP_CONFIG_NAME, "" + LAP_ON_STOP);
+        configurations.put(SCREEN_ORIENTATION_ACTIVATED_CONFIG_NAME, "" + SCREEN_ORIENTATION_ACTIVATED);
+        configurations.put(VOLUME_KEY_CONTROLLER_ACTIVATED_CONFIG_NAME, "" + VOLUME_KEY_CONTROLLER_ACTIVATED);
+        return  configurations;
     }
 }

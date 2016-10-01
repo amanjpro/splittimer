@@ -31,6 +31,7 @@
 package me.amanj.splittimer.util;
 
 import android.content.Context;
+import android.content.SharedPreferences;
 import android.net.ParseException;
 import android.support.v7.widget.SwitchCompat;
 import android.util.Log;
@@ -44,6 +45,7 @@ import java.io.InputStreamReader;
 import java.io.PrintWriter;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 
 import me.amanj.splittimer.R;
 
@@ -55,7 +57,43 @@ import me.amanj.splittimer.R;
 public class IO {
 
     private final static String TAG = IO.class.getCanonicalName();
+    private final static String CONFIGURATION_SAVE_FLAG = "CONFIGURATION_SAVED_CONFIG_NAME";
+
+
     public static void loadConfigurations(Context context) {
+        SharedPreferences settings =
+                context.getSharedPreferences(Configurations.CONFIGURATIONS_FILE_NAME, 0);
+        if(settings.contains(CONFIGURATION_SAVE_FLAG)) {
+            Log.i(TAG, "New Preference loader");
+            Configurations.updateCurrentFormat(
+                    Integer.parseInt(
+                            settings.getString(Configurations.CURRENT_FORMAT_CONFIG_NAME,
+                                    Configurations.getCurrentFormat())));
+
+            Configurations.setLapOnStop(
+                    Boolean.parseBoolean(
+                            settings.getString(Configurations.LAP_ON_STOP_CONFIG_NAME,
+                                    "" + Configurations.shouldLapOnStop())));
+
+            Configurations.activateScreenRotation(
+                    Boolean.parseBoolean(
+                            settings.getString(Configurations.SCREEN_ORIENTATION_ACTIVATED_CONFIG_NAME,
+                                    "" + Configurations.isScreenRotationActivated())));
+
+            Configurations.activateVolumeKeyControler(
+                    Boolean.parseBoolean(
+                            settings.getString(Configurations.VOLUME_KEY_CONTROLLER_ACTIVATED_CONFIG_NAME,
+                                    "" + Configurations.isVolumeKeyControlerActivated())));
+        } else {
+            loadConfigurationsFallback(context);
+        }
+    }
+
+    /**
+     * This is only called if the configuration is saved the old way. If this is the case,
+     * Upon next save, save it to the Shared Preferences instead of a plain text-file.
+     */
+    private static void loadConfigurationsFallback(Context context) {
         BufferedReader reader = null;
         Log.i(TAG, "Loading configurations");
         try {
@@ -132,7 +170,8 @@ public class IO {
         return list;
     }
 
-    public static void saveToFile(Context context, String fileName, String content) {
+    public static void saveEntriesToFile(Context context, String content) {
+        String fileName = Configurations.ENTRIES_FILE_NAME;
         Log.i(TAG, "Saving content to file: " + fileName);
         try {
             FileOutputStream fos = context.openFileOutput(fileName, Context.MODE_PRIVATE);
@@ -143,5 +182,18 @@ public class IO {
         } catch (IOException e) {
             Log.i(TAG, "Bug in saving " + fileName);
         }
+    }
+
+
+    public static void saveConfigurations(Context context) {
+        SharedPreferences.Editor settings =
+                context.getSharedPreferences(Configurations.CONFIGURATIONS_FILE_NAME, 0).edit();
+        Map<String, String> configurations = Configurations.dumpConfigurations();
+        for(String key : configurations.keySet()) {
+            settings.putString(key,
+                    configurations.get(key));
+        }
+        settings.putString(CONFIGURATION_SAVE_FLAG, "true");
+        settings.commit();
     }
 }
