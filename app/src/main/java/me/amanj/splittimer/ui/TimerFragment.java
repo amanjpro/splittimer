@@ -94,18 +94,28 @@ public class TimerFragment extends Fragment {
     @Override
     public void onResume() {
         super.onResume();
+        Log.d(TAG, "Resumed");
+        if(isRunning) {
+            runner = new TimeRunner(currentTimeView, totalTimeDisplay, tstamp);
+            runner.start();
+        }
         bus.register(this);
     }
 
     @Override
     public void onPause() {
+        Log.d(TAG, "Paused");
         bus.unregister(this);
+        if(isRunning) {
+            runner.stopTimer();
+        }
         super.onPause();
     }
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        setRetainInstance(true);
         getActivity().getWindow().addFlags(WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON);
     }
 
@@ -314,7 +324,6 @@ public class TimerFragment extends Fragment {
     public void onActivityCreated(@Nullable Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
         listView.setDescendantFocusability(ViewGroup.FOCUS_BLOCK_DESCENDANTS);
-        setRetainInstance(true);
         Log.d(TAG, "Entering onActivityCreated");
         if(savedInstanceState != null) {
             isRunning = savedInstanceState.getBoolean("isRunning");
