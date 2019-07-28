@@ -41,12 +41,7 @@ import android.content.Context;
 import android.content.res.Resources;
 import android.graphics.Color;
 import android.os.Bundle;
-import android.support.v4.os.ResultReceiver;
-import android.support.v4.util.Pair;
-import android.support.v7.app.AppCompatActivity;
-import android.support.v7.widget.PopupMenu;
-import android.support.v7.widget.RecyclerView;
-import android.support.v7.widget.ThemedSpinnerAdapter;
+import android.os.ResultReceiver;
 import android.util.Log;
 import android.util.TypedValue;
 import android.view.MenuItem;
@@ -59,6 +54,11 @@ import android.widget.ListView;
 import android.widget.TextView;
 import android.os.Handler;
 
+
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.PopupMenu;
+import androidx.core.util.Pair;
+import androidx.recyclerview.widget.RecyclerView;
 
 import org.greenrobot.eventbus.EventBus;
 import org.greenrobot.eventbus.Subscribe;

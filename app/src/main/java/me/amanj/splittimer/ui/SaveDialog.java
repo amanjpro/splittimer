@@ -33,20 +33,19 @@ package me.amanj.splittimer.ui;
 
 import android.app.Activity;
 import android.app.Dialog;
-import android.content.Context;
 import android.content.DialogInterface;
 import android.os.Bundle;
-import android.support.design.widget.TextInputLayout;
-import android.support.v4.app.DialogFragment;
-import android.support.v4.os.ResultReceiver;
-import android.support.v4.view.ViewCompat;
-import android.support.v7.app.AlertDialog;
+
+import android.os.ResultReceiver;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.WindowManager;
-import android.view.inputmethod.InputMethodManager;
 import android.widget.EditText;
-import android.widget.Toast;
+
+import androidx.appcompat.app.AlertDialog;
+import androidx.fragment.app.DialogFragment;
+
+import com.google.android.material.textfield.TextInputLayout;
 
 import me.amanj.splittimer.R;
 

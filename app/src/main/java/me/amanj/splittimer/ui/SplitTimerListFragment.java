@@ -36,16 +36,17 @@ import android.graphics.PorterDuff;
 import android.graphics.drawable.ColorDrawable;
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
-import android.support.v4.app.Fragment;
-import android.support.v4.content.ContextCompat;
-import android.support.v4.view.ViewCompat;
-import android.support.v7.widget.LinearLayoutManager;
-import android.support.v7.widget.RecyclerView;
-import android.support.v7.widget.helper.ItemTouchHelper;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+
+import androidx.core.content.ContextCompat;
+import androidx.core.view.ViewCompat;
+import androidx.fragment.app.Fragment;
+import androidx.recyclerview.widget.ItemTouchHelper;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
 import org.greenrobot.eventbus.EventBus;
 import org.greenrobot.eventbus.Subscribe;
@@ -257,10 +258,10 @@ public class SplitTimerListFragment extends Fragment {
                     int childCount = parent.getLayoutManager().getChildCount();
                     for (int i = 0; i < childCount; i++) {
                         View child = parent.getLayoutManager().getChildAt(i);
-                        if (ViewCompat.getTranslationY(child) < 0) {
+                        if (child.getTranslationY() < 0) {
                             // view is coming down
                             lastViewComingDown = child;
-                        } else if (ViewCompat.getTranslationY(child) > 0) {
+                        } else if (child.getTranslationY() > 0) {
                             // view is coming up
                             if (firstViewComingUp == null) {
                                 firstViewComingUp = child;

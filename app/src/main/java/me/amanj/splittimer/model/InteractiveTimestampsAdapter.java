@@ -31,11 +31,8 @@
 package me.amanj.splittimer.model;
 
 import android.content.Context;
-import android.text.Layout;
-import android.view.ContextMenu;
 import android.view.View;
 import android.view.ViewGroup;
-import android.view.WindowManager;
 import android.widget.RelativeLayout;
 
 /**
