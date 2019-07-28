@@ -33,7 +33,6 @@ package me.amanj.splittimer.util;
 import android.content.Context;
 import android.content.SharedPreferences;
 import android.net.ParseException;
-import android.support.v7.widget.SwitchCompat;
 import android.util.Log;
 import android.widget.Toast;
 

@@ -31,13 +31,8 @@
 package me.amanj.splittimer.ui;
 
 import android.app.Activity;
-import android.support.annotation.Nullable;
-import android.support.v4.app.Fragment;
 import android.os.Bundle;
-import android.support.v4.os.ResultReceiver;
-import android.support.v4.view.ViewCompat;
-import android.support.v7.widget.LinearLayoutManager;
-import android.support.v7.widget.RecyclerView;
+import android.os.ResultReceiver;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.Menu;
@@ -52,6 +47,12 @@ import android.widget.ImageView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
+
+import androidx.annotation.Nullable;
+import androidx.core.view.ViewCompat;
+import androidx.fragment.app.Fragment;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
 import me.amanj.splittimer.R;
 import me.amanj.splittimer.util.TimeRunner;
@@ -153,12 +154,12 @@ public class TimerFragment extends Fragment {
         saveButton.getBackground().setAlpha(HALF_OPAQUE);
         lapButton.getBackground().setAlpha(HALF_OPAQUE);
 
-        ViewCompat.setActivated(saveButton, false);
+        saveButton.setActivated(false);
         saveButton.setEnabled(false);
         saveButton.setClickable(false);
         lapButton.setEnabled(false);
         lapButton.setClickable(false);
-        ViewCompat.setActivated(lapButton, false);
+        lapButton.setActivated(false);
 
         actionButton.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -169,7 +170,7 @@ public class TimerFragment extends Fragment {
                     actionButton.setBackgroundResource(R.drawable.ic_action_stop);
                     saveButton.getBackground().setAlpha(HALF_OPAQUE);
                     lapButton.getBackground().setAlpha(FULL_OPAQUE);
-                    ViewCompat.setActivated(lapButton, false);
+                    lapButton.setActivated(false);
                     lapButton.setEnabled(true);
                     lapButton.setClickable(true);
                     tstamp.start();
@@ -182,7 +183,7 @@ public class TimerFragment extends Fragment {
                     if(Configurations.shouldLapOnStop()) {
                         lapButton.getBackground().setAlpha(HALF_OPAQUE);
                         timestampsAdapter.add(lastLap);
-                        ViewCompat.setActivated(lapButton, false);
+                        lapButton.setActivated(false);
                         lapButton.setEnabled(false);
                         lapButton.setClickable(false);
                         totalTimeDisplay.setText(
@@ -191,7 +192,7 @@ public class TimerFragment extends Fragment {
                     currentTimeView.setText(Timestamp.timeStampToString(0l));
                 }
                 isRunning = !isRunning;
-                ViewCompat.setActivated(saveButton, !isRunning);
+                saveButton.setActivated(!isRunning);
                 saveButton.setEnabled(!isRunning);
                 saveButton.setClickable(!isRunning);
             }
@@ -204,9 +205,6 @@ public class TimerFragment extends Fragment {
                 lap();
             }
         });
-
-
-
 
         saveButton.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -346,7 +344,7 @@ public class TimerFragment extends Fragment {
                 lapButton.getBackground().setAlpha(HALF_OPAQUE);
             }
 
-            ViewCompat.setActivated(saveButton, saveState);
+            saveButton.setActivated(saveState);
             saveButton.setEnabled(saveState);
             saveButton.setClickable(saveState);
             if(saveState) {
@@ -371,7 +369,7 @@ public class TimerFragment extends Fragment {
             totalTimeDisplay.setText(
                     Timestamp.timeStampToString(tstamp.getElapsedTime()));
             lapButton.getBackground().setAlpha(HALF_OPAQUE);
-            ViewCompat.setActivated(lapButton, false);
+            lapButton.setActivated(false);
             lapButton.setEnabled(false);
             lapButton.setClickable(false);
         }

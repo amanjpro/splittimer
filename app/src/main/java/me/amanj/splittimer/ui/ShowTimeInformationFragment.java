@@ -31,15 +31,16 @@
 package me.amanj.splittimer.ui;
 
 import android.os.Bundle;
-import android.support.annotation.Nullable;
-import android.support.v4.app.Fragment;
-import android.support.v7.widget.LinearLayoutManager;
-import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
+
+import androidx.annotation.Nullable;
+import androidx.fragment.app.Fragment;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
 import org.greenrobot.eventbus.EventBus;
 import org.greenrobot.eventbus.Subscribe;
@@ -128,7 +129,7 @@ public class ShowTimeInformationFragment extends Fragment {
                 (TextView) view.findViewById(R.id.text_view_total_time_display);
         recyclerView = (RecyclerView) view.findViewById(R.id.laps_list_view);
         LinearLayoutManager llm = new LinearLayoutManager(this.getContext());
-        llm.setOrientation(LinearLayoutManager.VERTICAL);
+        llm.setOrientation(RecyclerView.VERTICAL);
         recyclerView.setLayoutManager(llm);        timestampsAdapter =
                 new StaticTimestampsAdapter(view.getContext().getApplicationContext());
         recyclerView.setAdapter(timestampsAdapter);

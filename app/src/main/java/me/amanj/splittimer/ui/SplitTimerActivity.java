@@ -34,22 +34,24 @@ import android.content.Intent;
 import android.content.pm.ActivityInfo;
 import android.content.res.Configuration;
 import android.net.Uri;
-import android.support.design.widget.NavigationView;
-import android.support.design.widget.TabLayout;
-import android.support.v4.view.GravityCompat;
-import android.support.v4.view.MenuItemCompat;
-import android.support.v4.view.ViewPager;
-import android.support.v4.widget.DrawerLayout;
-import android.support.v7.app.ActionBarDrawerToggle;
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-import android.support.v7.widget.SwitchCompat;
-import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.view.KeyEvent;
 import android.view.MenuItem;
 import android.widget.CompoundButton;
 import android.widget.TextView;
+
+import androidx.appcompat.app.ActionBarDrawerToggle;
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.SwitchCompat;
+import androidx.appcompat.widget.Toolbar;
+import androidx.core.view.GravityCompat;
+import androidx.core.view.MenuItemCompat;
+import androidx.drawerlayout.widget.DrawerLayout;
+import androidx.viewpager.widget.ViewPager;
+
+import com.google.android.material.navigation.NavigationView;
+import com.google.android.material.tabs.TabLayout;
 
 import org.greenrobot.eventbus.EventBus;
 
@@ -144,7 +146,7 @@ public class SplitTimerActivity extends AppCompatActivity {
                 Log.i(TAG, "LapOnStop configuration set to: " + isChecked);
             }
         });
-        MenuItemCompat.setActionView(item, lapOnStopSwitch);
+        item.setActionView(lapOnStopSwitch);
 
         final MenuItem item2 = nvDrawer.getMenu().findItem(R.id.nav_screen_orientation_switch);
         screenOrientationSwitch = (SwitchCompat) MenuItemCompat.getActionView(item2);
@@ -158,7 +160,7 @@ public class SplitTimerActivity extends AppCompatActivity {
                 Log.i(TAG, "ScreenOrientation configuration set to: " + isChecked);
             }
         });
-        MenuItemCompat.setActionView(item2, screenOrientationSwitch);
+        item2.setActionView(screenOrientationSwitch);
         setScreenOrientationSensor();
 
 
